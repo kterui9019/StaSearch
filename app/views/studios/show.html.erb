@@ -1,0 +1,4 @@
+<h1>show page</h1>
+<h2><%= @studio.name %></h2>
+<p>address:<%= @studio.address %></p>
+<a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>
