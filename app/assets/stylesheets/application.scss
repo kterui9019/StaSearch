@@ -1,0 +1,80 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+//Top page
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+}
+
+.jumbotron{
+  height: 400px;
+  .container{
+    h1{
+      text-align: center;
+    }
+    p{
+      text-align: center;
+    }
+    form{
+      padding-top: 30px;
+    }
+    
+  }
+}
+
+.area-container{
+  .area-inline{
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 1em;
+  }
+}
+
+//index page
+.index-container{
+  h1{
+    padding: 15px 0;
+    border-bottom: 1px solid gray;
+  }
+  .row{
+    margin-top: 25px;
+  }
+}
+
+//login
+.login-container{
+  .login-form{
+    background-color: white;
+    border: solid 1px gray;
+    padding: 40px;
+    margin:200px 350px;
+    h1{
+      text-align: center;
+    }
+    form{
+      .btn{
+        text-align: center;
+      }
+    }
+  }
+}
+
+//signup
+.signup-container{
+  .signup-form{
+    background-color: white;
+    border: solid 1px gray;
+    padding: 40px;
+    margin:200px 350px;
+    h1{
+      text-align: center;
+    }
+    form{
+      .btn{
+        text-align: center;
+      }
+    }
+  }
+}

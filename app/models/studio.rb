@@ -2,7 +2,7 @@ class Studio < ApplicationRecord
   belongs_to :area
   
   validates :name, presence: true
-  validates :address, presence: true
+  #validates :address, presence: true
   validates :area_id, presence: true
   
   def self.search_by_name(name)

@@ -1,2 +1,52 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/* Home */
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+}
+
+.jumbotron{
+  height: 400px;
+  .container{
+    h1{
+      text-align: center;
+    }
+    p{
+      text-align: center;
+    }
+    form{
+      padding-top: 35px;
+      .input-group{
+        margin: 0 auto;
+        #search_name{
+          width: 300px;
+          height: 35px;
+          float:left;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+.area-container{
+  .area-inline{
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 1em;
+  }
+}
+
+/* studios */
+
+.index-container{
+  h1{
+    border-bottom: 1px solid gray;
+  }
+  .row{
+    border-bottom: 1px solid gray;
+  }
+}

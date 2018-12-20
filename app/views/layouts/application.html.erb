@@ -10,28 +10,37 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
-      <a class="navbar-brand" href="<%= root_path %>">StudioApp</a>
-      <div class="collapse navbar-collapse">
-        <p class="navbar-text">店名で検索</p>
-         <%= form_tag(studios_path, method: 'get') do %>
-          <%= select_tag :search_area, options_from_collection_for_select(Area.all, :id, :name), {class: "form-control"} %>
-          <%= submit_tag "エリア検索", class: "btn btn-primary" %>
-        <% end %>
-        <ul class="navbar-nav">
-            </li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="<%= root_path %>">StudioApp</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="Navber">
+          <ul class="navbar-nav mr-auto">
+            
+          </ul>
+          <ul class="navbar-nav">
+            <%= form_tag(studios_path, method: 'get', class: "form-inline my-2 my-lg-0") do %>
+              <%= select_tag :search_area, options_from_collection_for_select(Area.all, :id, :name), {class: "form-control mr-sm-2", placeholder: "検索..."} %>
+              <%= submit_tag "エリア検索", class: "btn btn-outline-success my-2 my-sm-0" %>
+            <% end %>
             <li class="nav-item active">
-                <a class="nav-link" href="#">新規登録</a>
+              <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">データ一覧</a>
+              <a class="nav-link" href="<%= new_user_path %>">サインアップ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">エクスポート</a>
+              <a class="nav-link" href="<%= login_path %>">ログイン</a>
             </li>
-        </ul>
-      </div>  
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
     </nav>
-    <%= yield %>
+
+    <%= yield %>  
+    
   </body>
 </html>

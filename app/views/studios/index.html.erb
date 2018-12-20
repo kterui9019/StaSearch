@@ -1,7 +1,17 @@
-<h1>index page</h1>
-<% @studios.each do |studio| %>
-  <ul>
-    <a href = "<%= studio_path(studio) %>"><%= studio.name %></a>
-  </ul>
-<% end %>
-<a href="<%= new_studio_path %>">スタジオを投稿する</a>
+<div class="container index-container">
+  <h1>検索結果</h1>
+  
+  <% @studios.each do |studio| %>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <img class="card-img-top" src="..." alt="...">
+          <div class="card-body">
+            <h3><a href = "<%= studio_path(studio) %>"><h3><%= studio.name %></h3></a></h3>
+            <p>パラグラフが入る…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
