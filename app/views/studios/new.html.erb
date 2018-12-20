@@ -2,8 +2,9 @@
 
 <%= form_for(@studio) do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, class: "form-control" %>
   <%= f.label :address %>
-  <%= f.text_field :address %>
-  <%= f.submit %>
+  <%= f.text_field :address, class: "form-control" %>
+  <%= f.select :area_id, options_from_collection_for_select(Area.all, :id, :name), {}, {class: "form-control"} %>
+  <%= f.submit "送信", class: "btn btn-primary" %>
 <% end %>

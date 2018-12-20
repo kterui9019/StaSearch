@@ -1,2 +1,5 @@
 <h1>Home</h1>
-<%= link_to "index", studios_path %>
+<%= form_tag(studios_path, method: 'get') do %>
+  <%= text_field_tag :search_name, '', class: "form-control" %>
+  <%= submit_tag "検索", class:"btn btn-primary" %>
+<% end %>

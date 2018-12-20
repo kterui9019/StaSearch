@@ -10,6 +10,28 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
+      <a class="navbar-brand" href="<%= root_path %>">StudioApp</a>
+      <div class="collapse navbar-collapse">
+        <p class="navbar-text">店名で検索</p>
+         <%= form_tag(studios_path, method: 'get') do %>
+          <%= select_tag :search_area, options_from_collection_for_select(Area.all, :id, :name), {class: "form-control"} %>
+          <%= submit_tag "エリア検索", class: "btn btn-primary" %>
+        <% end %>
+        <ul class="navbar-nav">
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">新規登録</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">データ一覧</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">エクスポート</a>
+            </li>
+        </ul>
+      </div>  
+    </nav>
     <%= yield %>
   </body>
 </html>

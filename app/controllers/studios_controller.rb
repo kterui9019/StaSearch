@@ -2,7 +2,11 @@ class StudiosController < ApplicationController
   
   # get /studios
   def index
-    @studios = Studio.all
+    if params[:search_name]
+      @studios = Studio.search_by_name(params[:search_name])
+    else params[:search_area]
+      @studios = Studio.search_by_area(params[:search_area])
+    end
   end
   
   # post /studios
@@ -42,7 +46,7 @@ class StudiosController < ApplicationController
   end
   
   def studio_params
-    params.require(:studio).permit(:name,:address)
+    params.require(:studio).permit(:name,:address,:area_id)
   end
   
 end
