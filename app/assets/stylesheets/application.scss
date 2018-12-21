@@ -8,28 +8,39 @@ body{
 }
 
 .jumbotron{
-  height: 400px;
-  .container{
-    h1{
-      text-align: center;
-    }
-    p{
-      text-align: center;
-    }
-    form{
-      padding-top: 30px;
-    }
-    
+  height: 500px;
+  background-image:url("jumbotron-background.jpg");
+  position: relative;
+  .bkRGBA{
+    position: absolute;
+	  top: 0;
+	  right: 0;
+  	bottom: 0;
+  	left: 0;
+  	content: ' ';
+    background-color:rgba(0,0,0,0.6); 
+    .container{
+      padding-top: 120px;
+      h1{
+        text-align: center;
+        color: white;
+      }
+      p{
+        text-align: center;
+        padding-top:10px;
+        color: white;
+      }
+      form{
+        padding-top: 30px;
+      }
+    }  
   }
 }
 
-.area-container{
-  .area-inline{
-    display: inline-block;
-    width: 200px;
-    height: 100px;
-    margin: 1em;
-  }
+
+.area-card{
+  height: 300px;
+  margin-top: 15px;
 }
 
 //index page

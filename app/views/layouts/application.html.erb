@@ -26,15 +26,21 @@
               <%= select_tag :search_area, options_from_collection_for_select(Area.all, :id, :name), {class: "form-control mr-sm-2", placeholder: "検索..."} %>
               <%= submit_tag "エリア検索", class: "btn btn-outline-success my-2 my-sm-0" %>
             <% end %>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<%= new_user_path %>">サインアップ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<%= login_path %>">ログイン</a>
-            </li>
+            <% if logged_in? %>
+              <li class="nav-item active">
+                <%= link_to "ユーザートップ", user_path(current_user), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item active">
+                <%= link_to "新規登録", new_user_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", login_path, class: "nav-link" %>
+              </li>
+            <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>

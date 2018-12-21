@@ -1,11 +1,11 @@
 <div class="jumbotron">
-  <div class="container">
-    <h1>さあ、スタジオを探そう</h1>
-    <p>StudioAppは全国のスタジオを探すことができます。</p>
+  <div class="bkRGBA">
+    <div class="container">
+      <h1>さあ、スタジオを探そう</h1>
+      <p>StudioAppは全国のスタジオを探すことができます。</p>
       <%= form_tag(studios_path, method: 'get') do %>
         <div class="form row justify-content-center">
           <div class="col-2">
-            
           </div>
           <div class="col-6">
             <%= text_field_tag :search_name, '', class: "form-control mb-2", placeholder: "スタジオ名" %>
@@ -13,18 +13,18 @@
           <div class="col-2">
             <%= submit_tag "検索", class:"btn btn-primary mb-2" %>
           </div>
-
         </div>
       <% end %>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<div class="container area_container">
   <h2>エリアから探す</h2>
   <div class="row">
     <div class="col-sm-6 col-md-3">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="...">
+      <div class="card area-card">
+        <%= image_tag "shinjuku.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>新宿</h3>
           <p>新宿駅、代々木駅、などなど…</p>
@@ -32,8 +32,8 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="...">
+      <div class="card area-card">
+        <%= image_tag "shibuya.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>渋谷</h3>
           <p>渋谷駅、原宿駅、などなど…</p>
@@ -41,8 +41,8 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="...">
+      <div class="card area-card">
+        <%= image_tag "ikebukuro.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>池袋</h3>
           <p>池袋駅、大塚駅、などなど…</p>
@@ -50,8 +50,8 @@
       </div>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="...">
+      <div class="card area-card">
+        <%= image_tag "akihabara.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>秋葉原</h3>
           <p>秋葉原駅、お茶の水駅、などなど…</p>

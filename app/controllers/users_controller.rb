@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login
-  
+
   def new
     @user = User.new
   end
@@ -8,7 +7,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path
+      log_in(@user)
+      redirect_to user_path(@user)
     else
       render :new
     end
@@ -33,16 +33,11 @@ class UsersController < ApplicationController
   
     def user_params
       params.require(:user).permit(
+        :name,
         :email,
         :password,
         :password_confirmation
         )  
-    end
-  
-  protected
-
-    def not_authenticated
-      redirect_to login_path
     end
 
 end

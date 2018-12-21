@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'takarabako'
-gem 'sorcery', '~> 0.9.1'
+gem 'bcrypt'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
