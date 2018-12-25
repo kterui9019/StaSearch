@@ -12,8 +12,13 @@ class StudiosController < ApplicationController
   # post /studios
   def create
     @studio = Studio.new(studio_params)
-    @studio.save
-    redirect_to studios_path
+    if @studio.save
+      flash[:success] = "スタジオの登録に成功しました！"
+      redirect_to studios_path
+    else
+      flash.now[:danger] = "スタジオの登録に失敗しました。"
+      render 'new'
+    end
   end
   
   # get /studios/new
@@ -35,8 +40,13 @@ class StudiosController < ApplicationController
   def update
     @studio = Studio.find(params[:id])
     @studio.update_attributes(studio_params)
-    @studio.save
-    redirect_to studio_path(@studio)
+    if @studio.save
+      flash[:success] = "スタジオの編集に成功しました！"
+      redirect_to studio_path(@studio)
+    else
+      flash[:danger] = "スタジオの編集に失敗しました。"
+      render 'edit'
+    end
   end
   
   # delete /studios/:id

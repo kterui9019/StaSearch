@@ -7,9 +7,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:success] = "ユーザー登録に成功しました。"
       log_in @user
       redirect_to user_path(@user)
     else
+      flash.now[:danger] = "ユーザー登録に失敗しました。"
       render :new
     end
   end
@@ -23,10 +25,21 @@ class UsersController < ApplicationController
   end
   
   def update
+    user = User.find(params[:id])
+    if user
+      flash[:success] = "プロフィール情報を更新しました。"
+      user.update_attributes(user_params)
+      redirect_to user
+    else
+      flash.now[:danger] = "プロフィール情報を更新できませんでした。"
+      render "edit"
+    end
   end
   
   def destroy
     User.find(params[:id]).destroy
+    flash[:success] =   "退会処理が完了しました。"
+    redirect_to root_path
   end
   
   private
@@ -36,8 +49,9 @@ class UsersController < ApplicationController
         :name,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :image
         )  
     end
-
+    
 end

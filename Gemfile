@@ -19,6 +19,8 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'takarabako'
 gem 'bcrypt'
+gem 'carrierwave'
+gem 'rmagick'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

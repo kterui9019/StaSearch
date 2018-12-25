@@ -5,8 +5,9 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true
-  
-  
+  #カラムの名前をmount_uploaderに指定
+  mount_uploader :image, ImageUploader
+
   #トークンを生成するメソッド
   def self.new_token
     SecureRandom.urlsafe_base64
