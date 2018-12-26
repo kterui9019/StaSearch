@@ -37,7 +37,6 @@ body{
   }
 }
 
-
 .area-card{
   height: 300px;
   margin-top: 15px;
@@ -73,6 +72,15 @@ small {
 .studio-body{
   border-left: 1px solid gray;
 }
+
+// show_studio
+.show-studio-container{
+  text-align: center;
+  h2{
+    padding-top: 25px;
+  }
+}
+
 //login
 .login-container{
   .login-form{
