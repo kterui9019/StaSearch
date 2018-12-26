@@ -56,7 +56,10 @@ class StudiosController < ApplicationController
   end
   
   def studio_params
-    params.require(:studio).permit(:name,:address,:area_id)
+    params.require(:studio).permit(:name,
+                                   :address,
+                                   :area_id,
+                                   :image)
   end
   
 end

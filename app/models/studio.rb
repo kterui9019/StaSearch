@@ -1,5 +1,7 @@
 class Studio < ApplicationRecord
   belongs_to :area
+  #カラムの名前をmount_uploaderに指定
+  mount_uploader :image, ImageUploader
   
   validates :name, presence: true
   #validates :address, presence: true

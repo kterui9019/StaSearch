@@ -1,17 +1,39 @@
 <div class="container index-container">
-  <h1>検索結果</h1>
-  
+  <div class="row">
   <% @studios.each do |studio| %>
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="..." alt="...">
-          <div class="card-body">
-            <h3><a href = "<%= studio_path(studio) %>"><h3><%= studio.name %></h3></a></h3>
-            <p>パラグラフが入る…</p>
-          </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 studio-content">
+        <div class="well well-sm">
+          <h4><%= link_to studio.name, studio_path(studio) %></h4>
+            <div class="row studio-name">
+                <div class="col-sm-6 col-md-6">
+                  <% if studio.image? %>
+                    <%= image_tag studio.image.url, class:"img-rounded img-responsive" %>
+                  <% else %>
+                    <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                  <% end %>
+                </div>
+                <div class="col-sm-6 col-md-6 studio-body">
+                    <p>パラグラフ</p>
+                    <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                    </i></cite></small>
+                    <p>
+                        <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                        <br />
+                        <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                        <br />
+                        <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+                    <!-- Split button -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">
+                          Social
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
   <% end %>
+  </div><!-- /.row -->
+
+  
 </div>

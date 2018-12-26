@@ -50,10 +50,29 @@ body{
     border-bottom: 1px solid gray;
   }
   .row{
-    margin-top: 25px;
+    margin: 20px 0;
+    .studio-content{
+      margin: 20px 0;
+      border-top: 2px solid gray;
+      border-bottom: 1px solid gray;
+      .well{
+        padding-top: 15px; 
+      }
+    }
   }
 }
 
+.glyphicon {
+    margin-bottom: 10px;margin-right: 10px;
+  }
+small {
+  display: block;
+  line-height: 1.428571429;
+  color: #999;
+  }
+.studio-body{
+  border-left: 1px solid gray;
+}
 //login
 .login-container{
   .login-form{
