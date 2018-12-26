@@ -1,29 +1,30 @@
 <div class="container show-studio-container">
-  <h2><%= @studio.name %></h1>
   <p>最終更新日：<%= @studio.updated_at %></p>
+  <h2><%= @studio.name %> <i class="far fa-bookmark"></i></h2>
+  
   <% if @studio.image? %>
     <%= image_tag @studio.image.url, class:"img-rounded img-responsive" %>
   <% else %>
-    <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+    <%= image_tag "default-studio-icon.jpeg", class:"img-rounded img-responsive" %>
   <% end %>
   
-  <h4>店舗情報</h2>
+  <h4>店舗情報</h4>
   <table width="400" align="center">
     <tr align="left">
-      <td>店舗名</td><td><%= @studio.name %></td>
+      <td><i class="fas fa-home"></i> 店舗名</td><td><%= @studio.name %></td>
     </tr>
     <!-- <td>GoogleMapを入れる</td> -->
     <tr align="left">
-      <td>住所</td><td><%= @studio.address %></td>
+      <td><i class="fas fa-map-marker-alt"></i> 住所</td><td><%= @studio.address %></td>
     </tr>
     <tr align="left">
-      <td>エリア</td><td><%= @studio.area.name %></td>
+      <td><i class="fas fa-location-arrow"></i> エリア</td><td><%= @studio.area.name %></td>
     </tr>
     <tr align="left">
-      <td>電話番号</td><td><%= @studio.telno %></td>
+      <td><i class="fas fa-phone"></i> 電話番号</td><td><%= @studio.telno %></td>
     </tr>
     <tr align="left">
-      <td>ホームページ</td><td><%= @studio.url %></td>
+      <td><i class="fas fa-globe-europe"></i> ホームページ</td><td><%= @studio.url %></td>
     </tr>
   </table>
   <a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>

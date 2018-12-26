@@ -3,6 +3,7 @@ class StudiosController < ApplicationController
   
   # get /studios
   def index
+    @favorite = Favorite.new
     if params[:search_name]
       @studios = Studio.search_by_name(params[:search_name])
     else params[:search_area]

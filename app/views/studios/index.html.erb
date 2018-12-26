@@ -1,39 +1,38 @@
 <div class="container index-container">
-  <div class="row">
 
+<div class="row">
   <% @studios.each do |studio| %>
-    <div class="col-xs-12 col-sm-12 col-md-12 studio-content">
-        <div class="well well-sm">
-          <h4><%= link_to studio.name, studio_path(studio) %></h4>
-            <div class="row studio-name">
-                <div class="col-sm-6 col-md-6">
-                  <% if studio.image? %>
-                    <%= image_tag studio.image.url, class:"img-rounded img-responsive" %>
-                  <% else %>
-                    <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
-                  <% end %>
-                </div>
-                <div class="col-sm-6 col-md-6 studio-body">
-                    <p>パラグラフ</p>
-                    <small><cite title="San Francisco, USA"><%= studio.address %> <i class="glyphicon glyphicon-map-marker">
-                    </i></cite></small>
-                    <p>
-                        <i class="glyphicon glyphicon-envelope"></i>email@example.com <!-- ここ電話番号にしたい -->
-                        <br />
-                        <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a> <!-- ここlink_toにする -->
-                        <br />
-                    <!-- Split button -->
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">
-                          Social
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  <% end %>
-</div><!-- /.row -->
+  <div class="col-sm-12 col-md-4">
+    <div class="card img-thumbnail">
+      <% if studio.image? %>
+        <%= image_tag studio.image.url, class:"card-img-top" %>
+      <% else %>
+        <%= image_tag "default-studio-icon.jpeg", class:"card-img-top" %>
+      <% end %>
+      <div class="card-body px-2 py-3">
+        <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
+        <p class="card-text">コンテンツ コンテンツ コンテンツ</p>
+        <small><i class="fas fa-map-marker-alt"></i><cite title="<%= studio.address %>"><%= studio.address %> </small>
+        <i class="fas fa-phone"></i> <%= studio.telno %>
+        <br />
+        <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
+        <br />
+        <% if favorited?(current_user.id, studio.id) %>
+          <%= link_to(favorite_path(studio.favorite_id(current_user.id)), method: :delete) do %>
+            <button type="button" class="btn btn-secondary">
+              お気に入りから削除
+            </button>
+          <% end %>
+        <% else %>
+          <%= form_for(@favorite) do |f| %>
+            <%= hidden_field_tag :studio_id, studio.id %>
+            <%= f.submit "お気に入りへ追加", class:"btn btn-primary" %>
+          <% end %>
+        <% end %>
 
-  
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div><!-- /.col-sm-6.col-md-3 -->
+<% end %>
+</div><!-- /.row -->
 </div>

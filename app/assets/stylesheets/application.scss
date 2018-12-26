@@ -44,20 +44,8 @@ body{
 
 //index page
 .index-container{
-  h1{
-    padding: 15px 0;
-    border-bottom: 1px solid gray;
-  }
-  .row{
-    margin: 20px 0;
-    .studio-content{
-      margin: 20px 0;
-      border-top: 2px solid gray;
-      border-bottom: 1px solid gray;
-      .well{
-        padding-top: 15px; 
-      }
-    }
+  .col-sm-12{
+    padding: 20px 20px;
   }
 }
 
@@ -70,14 +58,20 @@ small {
   color: #999;
   }
 .studio-body{
-  border-left: 1px solid gray;
 }
 
 // show_studio
 .show-studio-container{
   text-align: center;
   h2{
-    padding-top: 25px;
+    padding: 25px 0;
+  }
+  p{
+    color: gray;
+    text-align: right;
+  }
+  h4{
+    padding: 50px 0 20px 0;
   }
 }
 

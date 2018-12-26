@@ -9,6 +9,8 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   #作ったスタジオ
   has_many :studios
+  #お気に入り
+  has_many :favorites
 
   #トークンを生成するメソッド
   def self.new_token
