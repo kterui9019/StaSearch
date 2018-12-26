@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :password, presence: true
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
+  #作ったスタジオ
+  has_many :studios
 
   #トークンを生成するメソッド
   def self.new_token

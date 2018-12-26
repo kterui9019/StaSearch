@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_061425) do
+ActiveRecord::Schema.define(version: 2018_12_26_082914) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_12_26_061425) do
     t.string "image"
     t.string "telno"
     t.string "url"
+    t.integer "created_user_id"
   end
 
   create_table "users", force: :cascade do |t|

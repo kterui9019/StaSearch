@@ -1,5 +1,8 @@
 class Studio < ApplicationRecord
+  #エリア
   belongs_to :area
+  #作ったユーザ
+  belongs_to :user, optional: true
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
   

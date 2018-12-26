@@ -1,4 +1,5 @@
 class StudiosController < ApplicationController
+  before_action :log_in_user, only:[:create, :new, :edit, :update, :destroy]
   
   # get /studios
   def index
@@ -12,6 +13,8 @@ class StudiosController < ApplicationController
   # post /studios
   def create
     @studio = Studio.new(studio_params)
+    @studio.created_user_id = @current_user.id
+    #debugger
     if @studio.save
       flash[:success] = "スタジオの登録に成功しました！"
       redirect_to studios_path
@@ -55,11 +58,14 @@ class StudiosController < ApplicationController
     redirect_to studios_path
   end
   
-  def studio_params
-    params.require(:studio).permit(:name,
-                                   :address,
-                                   :area_id,
-                                   :image)
-  end
+  private
+    def studio_params
+      params.require(:studio).permit(:name,
+                                     :address,
+                                     :area_id,
+                                     :image,
+                                     :telno,
+                                     :url)
+    end
   
 end

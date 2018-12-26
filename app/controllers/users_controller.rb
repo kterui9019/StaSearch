@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @create_studios = Studio.where("created_user_id = #{@user.id.to_i}")
   end
   
   def edit
