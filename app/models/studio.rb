@@ -9,6 +9,9 @@ class Studio < ApplicationRecord
   #ハッシュタグ
   has_many :hash_tag_relationships
   has_many :hash_tags, through: :hash_tag_relationships
+  #レビュー
+  has_many :review_relationships
+  has_many :reviews, through: :review_relationships
 
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader

@@ -8,7 +8,13 @@
     <%= image_tag "default-studio-icon.jpeg", class:"img-rounded img-responsive" %>
   <% end %>
   
-  <p><%= render "hash_tag" %></p>
+  <div class="review-content">
+    <% @reviews.each do |review| %>
+      <%= review.user.name %>
+      <%= review.review %>
+    <% end %>
+    <%= link_to "口コミを投稿", new_review_path(studio_id: @studio.id) %>
+  </div>
   
   <h4>店舗情報</h4>
   <table width="300" align="center">
@@ -29,5 +35,6 @@
       <td><i class="fas fa-globe-europe"></i> ホームページ</td><td><%= @studio.url %></td>
     </tr>
   </table>
+  <p><%= render "hash_tag" %></p>
   <a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>
 </div>

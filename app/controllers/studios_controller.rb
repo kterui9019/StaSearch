@@ -40,6 +40,7 @@ class StudiosController < ApplicationController
   def show
     @studio = Studio.find(params[:id])
     @hash_tags = @studio.hash_tags
+    @reviews   = @studio.reviews
   end
   
   # patch /studios/:id
