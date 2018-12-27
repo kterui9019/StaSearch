@@ -10,9 +10,11 @@ class User < ApplicationRecord
   #作ったスタジオ user.create_studiosで呼び出せる
   #(class_nameは子のクラス名を指定、foreign_keyは子が親を呼び出すための外部キーカラム名)
   has_many :create_studios, class_name: "Studio", foreign_key: 'created_user_id'
-  #お気に入り
+  #お気に入り 以下のhas_manyを逆にするとエラーになる
   has_many :favorites
-
+  has_many :favorite_studios, through: :favorites, source: :studio
+  
+  
 
   #トークンを生成するメソッド
   def self.new_token

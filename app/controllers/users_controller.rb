@@ -18,8 +18,6 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @create_studios = Studio.where("created_user_id = #{@user.id.to_i}")
-    @favorite_studios = favorited_studios(@user.id)
   end
   
   def edit
@@ -56,12 +54,4 @@ class UsersController < ApplicationController
         )  
     end
     
-    def favorited_studios(user_id)
-      favorites = Favorite.where("user_id = ?","#{user_id}")
-      studios = []
-      favorites.each do |favorite|
-        studios.push(Studio.find(favorite.studio_id))
-      end
-      return studios
-    end
 end

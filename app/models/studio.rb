@@ -5,6 +5,8 @@ class Studio < ApplicationRecord
   belongs_to :created_user, class_name: "User", optional: true
   #お気に入り
   has_many :favorites
+  has_many :favorited_users, through: :favorites, source: :user
+
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
   
