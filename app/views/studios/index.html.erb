@@ -3,7 +3,7 @@
 <div class="row">
   <% @studios.each do |studio| %>
   <div class="col-sm-12 col-md-4">
-    <div class="card img-thumbnail">
+    <div class="card img-thumbnail h-100">
       <% if studio.image? %>
         <%= image_tag studio.image.url, class:"card-img-top" %>
       <% else %>

@@ -13,7 +13,8 @@ class User < ApplicationRecord
   #お気に入り 以下のhas_manyを逆にするとエラーになる
   has_many :favorites
   has_many :favorite_studios, through: :favorites, source: :studio
-  
+  #レビュー
+  has_many :reviews
   
 
   #トークンを生成するメソッド

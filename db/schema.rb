@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_035608) do
+ActiveRecord::Schema.define(version: 2018_12_27_073620) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,20 @@ ActiveRecord::Schema.define(version: 2018_12_27_035608) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "review_relationships", force: :cascade do |t|
+    t.integer "studio_id"
+    t.integer "review_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
   create_table "studios", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -58,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_035608) do
     t.string "password_digest"
     t.string "remember_digest"
     t.string "image"
+    t.integer "review_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
