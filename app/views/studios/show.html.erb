@@ -8,8 +8,10 @@
     <%= image_tag "default-studio-icon.jpeg", class:"img-rounded img-responsive" %>
   <% end %>
   
+  <p><%= render "hash_tag" %></p>
+  
   <h4>店舗情報</h4>
-  <table width="400" align="center">
+  <table width="300" align="center">
     <tr align="left">
       <td><i class="fas fa-home"></i> 店舗名</td><td><%= @studio.name %></td>
     </tr>

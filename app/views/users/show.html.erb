@@ -1,7 +1,7 @@
 <div class="container user_show_container">
   <div class="row">
     <aside class="col-md-4">
-      <%= image_tag @user.image.thumb150.url class: "icon-image" %>
+      <%= image_tag 'default-user-icon.jpeg', class: "icon-image" %>
       <h3><%= @user.name %></h3>
       <%= link_to "プロフィール編集", edit_user_path(@user) %> | <%= link_to "退会する", user_path, method: :delete %>
     </aside>
@@ -26,8 +26,8 @@
         <br />
         <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
         <br />
-        <% if favorited?(current_user.id, studio.id) %>
-          <%= link_to(favorite_path(studio.favorite_id(current_user.id)), method: :delete) do %>
+        <% if favorite = Favorite.find_by(user_id: @user.id, studio_id: studio.id) %>
+          <%= link_to(favorite_path(favorite.id), method: :delete) do %>
             <button type="button" class="btn btn-secondary">
               お気に入りから削除
             </button>

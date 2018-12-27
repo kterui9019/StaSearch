@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_104720) do
+ActiveRecord::Schema.define(version: 2018_12_27_035608) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(version: 2018_12_26_104720) do
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "studio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hash_tag_relationships", force: :cascade do |t|
+    t.integer "studio_id"
+    t.integer "hash_tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hash_tags", force: :cascade do |t|
+    t.string "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
