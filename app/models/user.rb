@@ -13,6 +13,7 @@ class User < ApplicationRecord
   #お気に入り
   has_many :favorites
 
+
   #トークンを生成するメソッド
   def self.new_token
     SecureRandom.urlsafe_base64
