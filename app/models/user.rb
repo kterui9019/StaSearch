@@ -7,10 +7,12 @@ class User < ApplicationRecord
   validates :password, presence: true
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
-  #作ったスタジオ
-  has_many :studios
+  #作ったスタジオ user.create_studiosで呼び出せる
+  #(class_nameは子のクラス名を指定、foreign_keyは子が親を呼び出すための外部キーカラム名)
+  has_many :create_studios, class_name: "Studio", foreign_key: 'created_user_id'
   #お気に入り
   has_many :favorites
+
 
   #トークンを生成するメソッド
   def self.new_token
