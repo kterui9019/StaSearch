@@ -6,6 +6,9 @@ class Studio < ApplicationRecord
   #お気に入り
   has_many :favorites
   has_many :favorited_users, through: :favorites, source: :user
+  #ハッシュタグ
+  has_many :hash_tag_relationships
+  has_many :hash_tags, through: :hash_tag_relationships
 
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
@@ -21,10 +24,11 @@ class Studio < ApplicationRecord
   def self.search_by_area(id)
     Studio.where('area_id = ?',"#{id.to_i}")
   end
-  
-  def favorite_id(user_id)
-    favorite = Favorite.find_by(studio_id: self.id, user_id: user_id)
-    favorite.id
+
+  def regist_hash_tag(hash_tag_ids)
+    hash_tag_ids.each do |hash_tag_id|
+      hash_tag = HashTagRelationship.new(studio_id: self.id, hash_tag_id: hash_tag_id)
+      hash_tag.save
+    end
   end
-  
 end

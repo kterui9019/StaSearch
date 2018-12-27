@@ -1,9 +1,13 @@
 areas=["新宿","渋谷","池袋","秋葉原"]
+tags =['#料金が安い', '#設備がキレイ', '#エフェクターレンタル可','#待合室が広い','#wi-fi有', '#24時間営業']
 
 areas.each do |area|
   Area.create!(name: area)
 end
 
+tags.each do |tag|
+  HashTag.create!(tag: tag)
+end
 
 100.times do |n|
   name = "スタジオ" + Takarabako.open

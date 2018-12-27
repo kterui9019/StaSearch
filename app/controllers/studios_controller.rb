@@ -15,8 +15,8 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(studio_params)
     @studio.created_user_id = @current_user.id
-    #debugger
     if @studio.save
+      @studio.regist_hash_tag(params[:studio][:hash_tags])
       flash[:success] = "スタジオの登録に成功しました！"
       redirect_to studios_path
     else
@@ -28,6 +28,7 @@ class StudiosController < ApplicationController
   # get /studios/new
   def new
     @studio = Studio.new
+    @hash_tags = HashTag.all
   end
   
   # get /studios/:id/edit
@@ -38,6 +39,7 @@ class StudiosController < ApplicationController
   # get /studios/:id
   def show
     @studio = Studio.find(params[:id])
+    @hash_tags = @studio.hash_tags
   end
   
   # patch /studios/:id
