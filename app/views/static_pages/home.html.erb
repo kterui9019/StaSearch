@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron-fluid">
   <div class="bkRGBA">
     <div class="container">
       <h1>さあ、スタジオを探そう</h1>
@@ -23,40 +23,42 @@
   <h2>エリアから探す</h2>
   <div class="row">
     <div class="col-sm-6 col-md-3">
-      <div class="card area-card">
+      <%= link_to studios_path(search_area: 1), class: "card area-card h-100" do %>
         <%= image_tag "shinjuku.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>新宿</h3>
           <p>新宿駅、代々木駅、などなど…</p>
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card area-card">
+      <%= link_to studios_path(search_area: 2), class: "card area-card h-100" do %>
         <%= image_tag "shibuya.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>渋谷</h3>
           <p>渋谷駅、原宿駅、などなど…</p>
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card area-card">
+      <%= link_to studios_path(search_area: 3), class: "card area-card h-100" do %>
         <%= image_tag "ikebukuro.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>池袋</h3>
           <p>池袋駅、大塚駅、などなど…</p>
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <div class="card area-card">
+      <%= link_to studios_path(search_area: 4), class: "card area-card h-100" do %>  
         <%= image_tag "akihabara.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>秋葉原</h3>
           <p>秋葉原駅、お茶の水駅、などなど…</p>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
+  <h1>新着スタジオ</h1>
 </div>
+  
