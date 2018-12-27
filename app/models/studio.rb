@@ -1,8 +1,8 @@
 class Studio < ApplicationRecord
   #エリア
   belongs_to :area
-  #作ったユーザ
-  belongs_to :user, optional: true
+  #作ったユーザとのアソシエーション studio.created_user.name といった形で呼び出せる
+  belongs_to :created_user, class_name: "User", optional: true
   #お気に入り
   has_many :favorites
   #カラムの名前をmount_uploaderに指定
