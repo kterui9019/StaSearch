@@ -5,9 +5,11 @@
 
 body{
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  background-color: #F5F5F5;
 }
 
-.jumbotron{
+
+.jumbotron-fluid{
   height: 500px;
   background-image:url("jumbotron-background.jpg");
   position: relative;
@@ -36,11 +38,18 @@ body{
     }  
   }
 }
-
-.area-card{
-  height: 300px;
-  margin-top: 15px;
+.area_container{
+  margin-top: 30px;
+  .row-height {
+    display: flex;
+    flex-wrap: wrap;
+    .area-card{
+      margin-top: 15px;
+    }
+  }
 }
+
+
 
 //index page
 .index-container{
