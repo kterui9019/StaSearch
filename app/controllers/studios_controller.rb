@@ -20,7 +20,7 @@ class StudiosController < ApplicationController
     if @studio.save
       @studio.regist_hash_tag(params[:studio][:hash_tags])
       flash[:success] = "スタジオの登録に成功しました！"
-      redirect_to studios_path
+      redirect_to studio_path(@studio)
     else
       flash.now[:danger] = "スタジオの登録に失敗しました。"
       render 'new'
