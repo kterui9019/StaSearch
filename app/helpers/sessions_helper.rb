@@ -25,7 +25,6 @@ module SessionsHelper
   end
   
   def logged_in?
-    #current_userが帰ってきたらtrueの!でfalse、falseはnilなのでtrueになる 帰ってこなければその逆で採取的にfalse
     !current_user.nil?
   end
   

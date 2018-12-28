@@ -5,9 +5,11 @@ class StudiosController < ApplicationController
   def index
     @favorite = Favorite.new
     if params[:search_name]
-      @studios = Studio.search_by_name(params[:search_name])
-    else params[:search_area]
-      @studios = Studio.search_by_area(params[:search_area])
+      @studios = Studio.where('name LIKE ?',"%#{params[:search_name]}%").paginate(page: params[:page], per_page: 9)
+      #@studios = Studio.paginate(:page => params[:page])
+    elsif params[:search_area]
+      @studios = Studio.where('area_id = ?',"#{params[:search_area].to_i}").paginate(page: params[:page], per_page: 9)
+      #@studios = Studio.paginate(:page => params[:page])
     end
   end
   

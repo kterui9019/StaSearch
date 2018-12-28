@@ -82,19 +82,20 @@
           <br />
           <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
           <br />
-          <% if favorite = Favorite.find_by(user_id: current_user.id, studio_id: studio.id) %>
-            <%= link_to(favorite_path(favorite.id), method: :delete) do %>
-              <button type="button" class="btn btn-secondary">
-                お気に入りから削除
-              </button>
-            <% end %>
-          <% else %>
-            <%= form_for(@favorite) do |f| %>
-              <%= hidden_field_tag :studio_id, studio.id %>
-              <%= f.submit "お気に入りへ追加", class:"btn btn-primary" %>
+          <% if logged_in? %>
+            <% if favorite = Favorite.find_by(user_id: current_user.id, studio_id: studio.id) %>
+              <%= link_to(favorite_path(favorite.id), method: :delete) do %>
+                <button type="button" class="btn btn-secondary">
+                  お気に入りから削除
+                </button>
+              <% end %>
+            <% else %>
+              <%= form_for(@favorite) do |f| %>
+                <%= hidden_field_tag :studio_id, studio.id %>
+                <%= f.submit "お気に入りへ追加", class:"btn btn-primary" %>
+              <% end %>
             <% end %>
           <% end %>
-  
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->
