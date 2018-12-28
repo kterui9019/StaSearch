@@ -1,5 +1,7 @@
 <div class="container index-container">
-  <%= will_paginate %>
+  <div class="search-number-container">
+    <p class="search-number"><%= show_current_number(@studios.current_page,@studios.size) %>件を表示 ／ 全<%= @studios.total_entries %>件</p>
+  </div>
   <div class="row">
     <% @studios.each do |studio| %>
     <div class="col-sm-12 col-md-4">
