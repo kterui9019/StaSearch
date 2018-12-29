@@ -25,3 +25,9 @@ User.create!(
                 telno: "000-0000-0000",
                 url: "http://www.testtest.com")
 end
+
+=begin
+uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=牛角&language=ja&fields=id&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
+res = HTTP.get(uri).to_s
+response = JSON.parse(res)
+=end
