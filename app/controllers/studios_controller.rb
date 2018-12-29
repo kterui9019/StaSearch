@@ -71,7 +71,9 @@ class StudiosController < ApplicationController
                                      :area_id,
                                      :image,
                                      :telno,
-                                     :url)
+                                     :url,
+                                     :latitude,
+                                     :longitude)
     end
   
 end

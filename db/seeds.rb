@@ -9,14 +9,19 @@ tags.each do |tag|
   HashTag.create!(tag: tag)
 end
 
-100.times do |n|
+User.create!(
+              name:"foobar",
+              email:"foo@bar",
+              password:"foobar")
+
+30.times do |n|
   name = "スタジオ" + Takarabako.open
   area_id = Random.rand(1..4)
-  Studio.create!(name: name,
-               area_id: area_id,
-               image: "default-studio-icon.jpeg",
-               address: "ここに住所が入ります",
-               telno: "000-0000-0000",
-               url: "http://www.testtest.com"
-               )
+  Studio.create!(
+                name: name,
+                area_id: area_id,
+                image: "default-studio-icon.jpeg",
+                address: "横浜市青葉区",
+                telno: "000-0000-0000",
+                url: "http://www.testtest.com")
 end

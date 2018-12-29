@@ -16,6 +16,10 @@
     <%= link_to "口コミを投稿", new_review_path(studio_id: @studio.id) %>
   </div>
   
+  <div style='width: 100%;'>
+   <div id="map" style='width: 50%; height: 33vh;'></div>
+  </div>
+  
   <h4>店舗情報</h4>
   <table width="300" align="center">
     <tr align="left">
@@ -38,3 +42,40 @@
   <p><%= render "hash_tag" %></p>
   <a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>
 </div>
+
+<style>
+#map{
+  height: 400px;
+}
+</style>
+
+<script type="text/javascript">
+  function initMap() {
+
+    var test = {lat: <%= @studio.latitude %>, lng: <%= @studio.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: test
+    });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = '住所：<%= @studio.address %>';
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position:test,
+      map: map,
+      title: contentString
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLEMAPS_HTTP_KEY'] %>&callback=initMap">
+</script>
