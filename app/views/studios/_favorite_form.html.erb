@@ -1,0 +1,7 @@
+<div id="favorite_form">
+  <% if Favorite.find_by(user_id: current_user.id, studio_id: @studio.id) %>
+    <%= render "unfavorite" %>
+  <% else %>
+    <%= render "favorite" %>
+  <% end %>
+</div>
