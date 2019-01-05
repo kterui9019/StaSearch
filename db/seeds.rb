@@ -21,7 +21,7 @@ User.create!(
                 name: name,
                 area_id: area_id,
                 image: "default-studio-icon.jpeg",
-                address: "横浜市青葉区",
+                address: "東京都新宿区西新宿２丁目８−１",
                 telno: "000-0000-0000",
                 url: "http://www.testtest.com")
 end

@@ -1,18 +1,26 @@
 class FavoritesController < ApplicationController
   before_action :log_in_user
+  
   def create
-    favorite = Favorite.new(user_id: @current_user.id, studio_id: params[:studio_id].to_i)
+    @studio = Studio.find(params[:studio_id])
+    favorite = Favorite.new(user_id: @current_user.id, studio_id: @studio.id)
     if favorite.save
-      flash[:success] = "お気に入りに追加しました。"
-      redirect_to studio_path(Studio.find(favorite.studio_id))
+      #flash[:success] = "お気に入りに追加しました。"
+      respond_to do |format|
+        format.html { redirect_to @studio }
+        format.js
+      end
     else
-      flash.now[:danger] = "お気に入りの追加に失敗しました。"
       render studios_path
     end
   end
   
   def destroy
-    Favorite.find(params[:id]).destroy
-    redirect_to studios_path
+    @studio = Studio.find(params[:studio_id])
+    Favorite.find_by(params[:id]).destroy
+    respond_to do |format|
+      format.html { redirect_to @studio }
+      format.js
+    end
   end
 end

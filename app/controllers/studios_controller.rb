@@ -3,7 +3,6 @@ class StudiosController < ApplicationController
   
   # get /studios
   def index
-    @favorite = Favorite.new
     if params[:search_name]
       @studios = Studio.where('name LIKE ?',"%#{params[:search_name]}%").paginate(page: params[:page], per_page: 9)
       #@studios = Studio.paginate(:page => params[:page])
@@ -40,6 +39,7 @@ class StudiosController < ApplicationController
   
   # get /studios/:id
   def show
+    @favorite = Favorite.new 
     @studio = Studio.find(params[:id])
     @hash_tags = @studio.hash_tags
     @reviews   = @studio.reviews

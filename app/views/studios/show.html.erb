@@ -1,6 +1,7 @@
 <div class="container show-studio-container">
   <p>最終更新日：<%= @studio.updated_at %></p>
-  <h2><%= @studio.name %> <i class="far fa-bookmark"></i></h2>
+  <h2><%= @studio.name %> 
+  <%= render "favorite_form" %> </h2>
   
   <% if @studio.image? %>
     <%= image_tag @studio.image.url, class:"img-rounded img-responsive" %>
@@ -25,7 +26,6 @@
     <tr align="left">
       <td><i class="fas fa-home"></i> 店舗名</td><td><%= @studio.name %></td>
     </tr>
-    <!-- <td>GoogleMapを入れる</td> -->
     <tr align="left">
       <td><i class="fas fa-map-marker-alt"></i> 住所</td><td><%= @studio.address %></td>
     </tr>
