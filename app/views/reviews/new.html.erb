@@ -1,6 +1,12 @@
 <div class="container">
+
 <h1>レビュー投稿</h1>
-<%= form_for(@review) do |f| %>
+<%= form_for [@review] do |f| %>
+  <div class="field" id="rate">
+    <%= f.label :評価 %>
+    <%= f.hidden_field :rate, id: :review_rate %>
+  </div>
+
   <div class="form-group">
     <%= f.label :口コミ内容 %>
     <%= f.text_area :review, class: "form-control" %>
@@ -9,3 +15,13 @@
   <%= f.submit "送信", class: "btn btn-primary" %>
 <% end %>
 </div>
+
+
+<script>
+$('#rate').raty({
+  size     : 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  scoreName: 'review[rate]' 
+});
+</script>
