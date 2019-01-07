@@ -10,8 +10,8 @@
   <% end %>
   
   <div class="review-content">
-    <div class="rate">☆<%= rating(@reviews) %></div>
-    
+    <div class="rate"><i class="fas fa-star"></i><%= rating(@reviews) %></div>
+    <div class="reviews_count">全<%= @reviews.count %>件</div>
     <% @reviews.each do |review| %>
     <div class="review">
       <%= review.user.name %>
@@ -41,7 +41,7 @@
       <td><i class="fas fa-phone"></i> 電話番号</td><td><%= @studio.telno %></td>
     </tr>
     <tr align="left">
-      <td><i class="fas fa-globe-europe"></i> ホームページ</td><td><%= @studio.url %></td>
+      <td><i class="fas fa-globe-europe"></i> URL</td><td><%= @studio.url %></td>
     </tr>
   </table>
   <p><%= render "hash_tag" %></p>
