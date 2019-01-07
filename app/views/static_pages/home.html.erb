@@ -66,7 +66,8 @@
     <div class="col-sm-12 col-md-3">
       <div class="card img-thumbnail h-100">
         <% if studio.image? %>
-          <%= image_tag studio.image.url, class:"card-img-top" %>
+          <%#= image_tag studio.image.url, class:"card-img-top" %>
+          <%= image_tag "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{studio.image}&key=#{ENV['GOOGLEMAPS_HTTP_KEY']}" %>
         <% else %>
           <%= image_tag "default-studio-icon.jpeg", class:"card-img-top" %>
         <% end %>
