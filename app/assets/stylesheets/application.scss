@@ -81,20 +81,22 @@ small {
 
 // show_studio
 .show-studio-container{
+    .card{
+      margin: 20px 0;
+    }  
+  
   text-align: center;
-  h2{
-    padding: 25px 0;
+  .show-studio-header{
+    display: inline-block;
     #favorite_form{
       display: inline-block;
     }
   }
-  p{
+  .updated_at{
     color: gray;
     text-align: right;
   }
-  h4{
-    padding: 50px 0 20px 0;
-  }
+  
 }
 
 //login
