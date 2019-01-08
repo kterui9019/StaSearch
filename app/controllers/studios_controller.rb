@@ -3,10 +3,12 @@ class StudiosController < ApplicationController
 
   # get /studios
   def index
+=begin    
     @q = Studio.ransack(params[:q])
     @areas = Area.all
     @hash_tags = HashTag.all
-    #@studios = @query.result(distinct: true).paginate(page: params[:page], per_page: 9)
+    @studios = @query.result(distinct: true).paginate(page: params[:page], per_page: 9)
+=end
     @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
 
 =begin
@@ -21,9 +23,11 @@ class StudiosController < ApplicationController
   end
   
   def search
+=begin
     @q = Studio.search(search_params)
     @areas = Area.all
     @hash_tags = HashTag.all
+=end
     @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
   end
   
