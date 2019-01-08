@@ -23,10 +23,13 @@
             
           </ul>
           <ul class="navbar-nav">
-            <%= form_tag(studios_path, method: 'get', class: "form-inline my-2 my-lg-0") do %>
-              <%= select_tag :search_area, options_from_collection_for_select(Area.all, :id, :name), {class: "form-control mr-sm-2", placeholder: "検索..."} %>
-              <%= submit_tag "エリア検索", class: "btn btn-outline-success my-2 my-sm-0" %>
+            
+            <%= search_form_for(@q, html: { class: 'form-inline my-2 my-lg-0' }, url:search_path) do |f| %>
+                <%= f.search_field :name_cont, class:"form-control", placeholder:"スタジオ名" %>
+                <%= f.collection_select :area_id_eq, @areas, :id, :name, {include_blank: '指定なし', prompt: true}, class: "form-control mr-sm-2" %>
+                <%= f.submit "検索", class:"btn btn-outline-success my-2 my-sm-0" %>
             <% end %>
+            
             <% if logged_in? %>
               <li class="nav-item active">
                 <%= link_to "スタジオを投稿する", new_studio_path, class: "nav-link" %>

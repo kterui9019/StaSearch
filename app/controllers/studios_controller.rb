@@ -1,8 +1,15 @@
 class StudiosController < ApplicationController
   before_action :log_in_user, only:[:create, :new, :edit, :update, :destroy]
-  
+
   # get /studios
   def index
+    @q = Studio.ransack(params[:q])
+    @areas = Area.all
+    @hash_tags = HashTag.all
+    #@studios = @query.result(distinct: true).paginate(page: params[:page], per_page: 9)
+    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
+
+=begin
     if params[:search_name]
       @studios = Studio.where('name LIKE ?',"%#{params[:search_name]}%").paginate(page: params[:page], per_page: 9)
       #@studios = Studio.paginate(:page => params[:page])
@@ -10,6 +17,14 @@ class StudiosController < ApplicationController
       @studios = Studio.where('area_id = ?',"#{params[:search_area].to_i}").paginate(page: params[:page], per_page: 9)
       #@studios = Studio.paginate(:page => params[:page])
     end
+=end
+  end
+  
+  def search
+    @q = Studio.search(search_params)
+    @areas = Area.all
+    @hash_tags = HashTag.all
+    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
   end
   
   # post /studios
@@ -65,6 +80,12 @@ class StudiosController < ApplicationController
   end
   
   private
+    def search_params
+      params.require(:q).permit(:name_cont,
+                                :area_id_eq,
+                                :hash_tag_id_in)
+    end
+  
     def studio_params
       params.require(:studio).permit(:name,
                                      :address,

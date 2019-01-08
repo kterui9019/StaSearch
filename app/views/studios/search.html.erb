@@ -2,9 +2,26 @@
   <div class="search-container">
     <%= render 'search_form' %>
   </div>
+  
+  <div class="search_query">
+  <h4>検索条件</h4>
+  <% unless params[:q][:name_cont].nil? %>
+  名前:<%= params[:q][:name_cont] %>
+  <% end %>
+  <br>
+  <% unless params[:q][:area_id_eq].nil? %>
+  エリア:<%= Area.find(params[:q][:area_id_eq]).name %>
+  <% end %>
+  <br>
+  <% unless params[:q][:hash_tags_id_in].nil? %>
+  ハッシュタグ:<%= params[:q][:hash_tags_id_in].reject(&:blank?).map{|hash_tag_id| HashTag.find(hash_tag_id).tag}.join(', ') %>
+  <% end %>
+  </div>
+  
   <div class="search-number-container">
     <p class="search-number"><%= show_current_number(@studios.current_page,@studios.size) %>件を表示 ／ 全<%= @studios.total_entries %>件</p>
   </div>
+
   <div class="row">
     <% @studios.each do |studio| %>
     <div class="col-sm-12 col-md-4">
