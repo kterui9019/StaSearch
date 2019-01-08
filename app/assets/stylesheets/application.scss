@@ -34,6 +34,13 @@ body{
       }
       form{
         padding-top: 30px;
+        .form-check{
+          margin-top:8px;
+        }
+        label{
+          color: white;
+          margin: 0 5px;
+        }
       }
     }  
   }
