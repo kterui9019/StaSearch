@@ -14,7 +14,7 @@ module StudiosHelper
   def rating(reviews)
     rate = 0.0
     if reviews.any?
-      reviews.each { |review| rate += review.rate }
+      reviews.each { |review| rate += review.rate.to_f }
       rate /= reviews.count
     end
     return rate

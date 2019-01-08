@@ -19,7 +19,8 @@ class Studio < ApplicationRecord
   
   validates :name, presence: true
   #validates :address, presence: true
-  validates :area_id, presence: true
+  #validates :area_id, presence: true
+  validates :place_id, uniqueness: true
   
   def self.search_by_name(name)
     Studio.where('name LIKE ?',"%#{name}%")
