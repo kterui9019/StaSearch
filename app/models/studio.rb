@@ -12,7 +12,6 @@ class Studio < ApplicationRecord
   #レビュー
   has_many :review_relationships
   has_many :reviews, through: :review_relationships
-  after_validation :geocode, if: :address_changed?
 
   #カラムの名前をmount_uploaderに指定
   mount_uploader :image, ImageUploader
@@ -37,12 +36,5 @@ class Studio < ApplicationRecord
     end
   end
   
-  private
-    def geocode
-      uri = URI.escape("https://maps.googleapis.com/maps/api/geocode/json?address="+self.address.gsub(" ", "")+"&key=#{ENV['GOOGLEMAPS_IP_KEY']}")
-      res = HTTP.get(uri).to_s
-      response = JSON.parse(res)
-      self.latitude = response["results"][0]["geometry"]["location"]["lat"]
-      self.longitude = response["results"][0]["geometry"]["location"]["lng"]
-    end
+
 end

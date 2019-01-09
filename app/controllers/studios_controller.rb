@@ -3,23 +3,7 @@ class StudiosController < ApplicationController
 
   # get /studios
   def index
-=begin    
-    @q = Studio.ransack(params[:q])
-    @areas = Area.all
-    @hash_tags = HashTag.all
-    @studios = @query.result(distinct: true).paginate(page: params[:page], per_page: 9)
-=end
-    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
-
-=begin
-    if params[:search_name]
-      @studios = Studio.where('name LIKE ?',"%#{params[:search_name]}%").paginate(page: params[:page], per_page: 9)
-      #@studios = Studio.paginate(:page => params[:page])
-    elsif params[:search_area]
-      @studios = Studio.where('area_id = ?',"#{params[:search_area].to_i}").paginate(page: params[:page], per_page: 9)
-      #@studios = Studio.paginate(:page => params[:page])
-    end
-=end
+    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews).paginate(page: params[:page], per_page: 9)
   end
   
   def search
@@ -85,8 +69,7 @@ class StudiosController < ApplicationController
   
   private
     def search_params
-      params.require(:q).permit(:name_cont,
-                                :area_id_eq,
+      params.require(:q).permit(:name_or_address_cont,
                                 :hash_tag_id_in)
     end
   

@@ -46,40 +46,73 @@ locations.each do |location|
   uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=音楽スタジオ&location=#{location}&radius=10000&language=ja&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
   res = HTTP.get(uri).to_s
   response = JSON.parse(res)
+  
+  #レスポンス最大20件分の保存処理
   response['results'].each do |result|
+    lat = result['geometry']['location']['lat']
+    lng = result['geometry']['location']['lng']
+    #逆ジオコーディング
+    geo_uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{lat},#{lng}&sensor=false&language=ja&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
+    geo_res = HTTP.get(geo_uri).to_s
+    geo_response = JSON.parse(geo_res)
+    address = geo_response['results'][0]['formatted_address'].slice(13..-1)
+    #都道府県を取得したくなったらこれを使う
+    #prefecture = geo_response['results'][0]['address_components'][4]['long_name']
+    
     studio = Studio.new(
                   name: result['name'],
                   area_id: 1,
-                  latitude: result['geometry']['location']['lat'],
-                  longitude: result['geometry']['location']['lng']                )
+                  latitude: lat,
+                  longitude: lng,
+                  address: address,
+                  place_id: result["place_id"]
+
+    )
+    #写真がある場合
     if result.has_key?("photos")
       photo_reference = result['photos'][0]['photo_reference'] 
       url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=#{photo_reference}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
       studio.remote_image_url = url
+    else
+      studio.image = "default-studio-icon.jpeg"
     end
     studio.save
   end
 
-  #next_page_tokenがある場合
+  #レスポンスにnext_page_tokenがある場合（21件以上ある場合）
   if response.has_key?("next_page_token") == true
     token = response["next_page_token"]
-    while true
+    2.times do
       #time.sleep(2)
       uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=音楽スタジオ&location=#{location}&radius=10000&language=ja&pagetoken=#{token}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
       res = HTTP.get(uri).to_s
       response = JSON.parse(res)
       response['results'].each do |result|
+        lat = result['geometry']['location']['lat']
+        lng = result['geometry']['location']['lng']
+        #逆ジオコーディング
+        geo_uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{lat},#{lng}&sensor=false&language=ja&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
+        geo_res = HTTP.get(geo_uri).to_s
+        geo_response = JSON.parse(geo_res)
+        address = geo_response['results'][0]['formatted_address'].slice(13..-1)
+        #都道府県を取得したくなったらこれを使う
+        #prefecture = geo_response['results'][0]['address_components'][4]['long_name']
         studio = Studio.new(
-                    name: result['name'],
-                    area_id: 1,
-                    latitude: result['geometry']['location']['lat'],
-                    longitude: result['geometry']['location']['lng'],
-                    place_id: result["place_id"]
-                    )
+                      name: result['name'],
+                      area_id: 1,
+                      latitude: lat,
+                      longitude: lng,
+                      address: address,
+                      place_id: result["place_id"]
+        )
+        
+        #写真がある場合
         if result.has_key?("photos")
           photo_reference = result['photos'][0]['photo_reference'] 
           url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=#{photo_reference}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
           studio.remote_image_url = url
+        else
+          studio.image = "default-studio-icon.jpeg"
         end
         studio.save
       end
