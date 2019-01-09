@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :set_search_query
   
   def set_search_query
-    @areas = Area.all
     @hash_tags = HashTag.all
     words = params[:q].delete(:name_or_address_cont) if params[:q].present?
     if words.present?
@@ -14,6 +13,8 @@ class ApplicationController < ActionController::Base
       end
     end
     @q = Studio.ransack(params[:q])
+    @studios = @q.result(distinct: true).includes(:hash_tags, :hash_tag_relationships, :reviews).paginate(page: params[:page], per_page: 9)
+    
   end
   
   private

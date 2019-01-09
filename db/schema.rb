@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_01_07_140333) do
 
-  create_table "areas", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "studio_id"
@@ -58,7 +52,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_140333) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "area_id"
     t.string "telno"
     t.string "url"
     t.integer "created_user_id"

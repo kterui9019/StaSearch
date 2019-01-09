@@ -1,11 +1,6 @@
 require "date"
 
-areas=["新宿","渋谷","池袋","秋葉原"]
 tags =['#料金が安い', '#設備がキレイ', '#エフェクターレンタル可','#待合室が広い','#wi-fi有', '#24時間営業']
-
-areas.each do |area|
-  Area.create!(name: area)
-end
 
 tags.each do |tag|
   HashTag.create!(tag: tag)
@@ -61,7 +56,6 @@ locations.each do |location|
     
     studio = Studio.new(
                   name: result['name'],
-                  area_id: 1,
                   latitude: lat,
                   longitude: lng,
                   address: address,
@@ -97,7 +91,6 @@ locations.each do |location|
         #prefecture = geo_response['results'][0]['address_components'][4]['long_name']
         studio = Studio.new(
                       name: result['name'],
-                      area_id: 1,
                       latitude: lat,
                       longitude: lng,
                       address: address,

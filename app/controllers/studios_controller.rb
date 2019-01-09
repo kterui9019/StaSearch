@@ -3,6 +3,7 @@ class StudiosController < ApplicationController
 
   # get /studios
   def index
+    @q = Studio.search(search_params)
     @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews).paginate(page: params[:page], per_page: 9)
   end
   
@@ -12,7 +13,8 @@ class StudiosController < ApplicationController
     @areas = Area.all
     @hash_tags = HashTag.all
 =end
-    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :review_relationships).paginate(page: params[:page], per_page: 9)
+    @q = Studio.search(search_params)
+    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews).paginate(page: params[:page], per_page: 9)
   end
   
   # post /studios
@@ -69,14 +71,14 @@ class StudiosController < ApplicationController
   
   private
     def search_params
-      params.require(:q).permit(:name_or_address_cont,
-                                :hash_tag_id_in)
+      #params.require(:q).permit(:hash_tags_id_in => [], groupings: [:name_or_address_cont])
+      params.require(:q).permit!
+
     end
   
     def studio_params
       params.require(:studio).permit(:name,
                                      :address,
-                                     :area_id,
                                      :image,
                                      :telno,
                                      :url,
