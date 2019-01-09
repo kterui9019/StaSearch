@@ -1,6 +1,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+
 //Top page
 
 body{
@@ -90,6 +91,14 @@ small {
 .show-studio-container{
     .card{
       margin: 20px 0;
+      #star-head{
+        display: inline-block;
+      }
+      .rate-score{
+        display: inline-block;
+        margin-left: 5px;
+      }
+        
     }  
   
   text-align: center;
