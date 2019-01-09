@@ -73,8 +73,6 @@ locations.each do |location|
       photo_reference = result['photos'][0]['photo_reference'] 
       url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=#{photo_reference}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
       studio.remote_image_url = url
-    else
-      studio.image = "default-studio-icon.jpeg"
     end
     studio.save
   end
@@ -111,8 +109,6 @@ locations.each do |location|
           photo_reference = result['photos'][0]['photo_reference'] 
           url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=#{photo_reference}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
           studio.remote_image_url = url
-        else
-          studio.image = "default-studio-icon.jpeg"
         end
         studio.save
       end

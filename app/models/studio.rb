@@ -14,6 +14,7 @@ class Studio < ApplicationRecord
   has_many :reviews, through: :review_relationships
 
   #カラムの名前をmount_uploaderに指定
+  THUMBNAIL_SIZE = [300, 250]
   mount_uploader :image, ImageUploader
   
   validates :name, presence: true

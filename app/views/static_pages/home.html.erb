@@ -68,12 +68,7 @@
   <% @new_studios.each do |studio| %>
     <div class="col-sm-12 col-md-3">
       <div class="card img-thumbnail h-100">
-        <% if studio.image? %>
-          <%#= image_tag studio.image.url, class:"card-img-top" %>
-          <%= image_tag "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{studio.image}&key=#{ENV['GOOGLEMAPS_HTTP_KEY']}" %>
-        <% else %>
-          <%= image_tag "default-studio-icon.jpeg", class:"card-img-top" %>
-        <% end %>
+        <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
         <div class="card-body px-2 py-3">
           <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
           <p class="card-text">
@@ -86,6 +81,7 @@
           <br />
           <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
           <br />
+          <i class="fas fa-star"></i><%= rating(studio.reviews) %> <i class="fas fa-comment-alt"></i><%= studio.reviews.count %>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->
