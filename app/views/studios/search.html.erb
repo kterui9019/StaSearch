@@ -5,16 +5,13 @@
   
   <div class="search_query">
   <h4>検索条件</h4>
-  <% unless params[:q][:name_cont].nil? %>
-  名前:<%= params[:q][:name_cont] %>
+  <% unless params[:q][:groupings].empty? %>
+    <% words = params[:q][:groupings] %>
+    検索ワード:<%= show_search_words(words) %>
   <% end %>
   <br>
-  <% unless params[:q][:area_id_eq].nil? %>
-  エリア:<%= Area.find(params[:q][:area_id_eq]).name %>
-  <% end %>
-  <br>
-  <% unless params[:q][:hash_tags_id_in].nil? %>
-  ハッシュタグ:<%= params[:q][:hash_tags_id_in].reject(&:blank?).map{|hash_tag_id| HashTag.find(hash_tag_id).tag}.join(', ') %>
+  <% unless params[:q][:hash_tags_id_in].nil? or params[:q][:hash_tags_id_in].reject(&:blank?).empty? %>
+    ハッシュタグ:<%= params[:q][:hash_tags_id_in].reject(&:blank?).map{|hash_tag_id| HashTag.find(hash_tag_id).tag}.join(', ') %>
   <% end %>
   </div>
   

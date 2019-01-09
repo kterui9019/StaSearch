@@ -20,4 +20,9 @@ module StudiosHelper
     return rate
   end
   
+  def show_search_words(words)
+    ary = []
+    words.each { |word| ary.push word[:name_or_address_cont] }
+    ary.join(" ")
+  end
 end

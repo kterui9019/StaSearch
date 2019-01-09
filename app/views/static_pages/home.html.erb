@@ -6,18 +6,15 @@
       
       <%= search_form_for(@q, html: { class: '' }, url:search_path) do |f| %>
         <div class="form-row">
-          <div class="col-sm-5 offset-sm-2">
-          <%= f.search_field :name_cont, class:"form-control", placeholder:"スタジオ名" %>
-          </div>
-          <div class="col-sm-2">
-          <%= f.collection_select :area_id_eq, @areas, :id, :name, {include_blank: '指定なし', prompt: true}, class: "form-control" %>
+          <div class="col-sm-7 offset-sm-2">
+          <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"新宿　サンプルスタジオ" %>
           </div>
           <div class="col-sm-1">
           <%= f.submit "検索", class:"btn btn-primary" %>
           </div>
         </div>
         <div class="text-center form-check">
-            <%= f.collection_check_boxes :hash_tags_id_in, @hash_tags, :id, :tag %>
+        　<%= f.collection_check_boxes :hash_tags_id_in, @hash_tags, :id, :tag %>
         </div>
       <% end %>
       
