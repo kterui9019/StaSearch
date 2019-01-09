@@ -5,14 +5,8 @@
         <div class="card-header">
           <h3 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" %></h3>
               <div class="rate"><i class="fas fa-star"></i><%= rating(@reviews) %></div>
-
         </div>
-        
-        <% if @studio.image? %>
-          <%= image_tag @studio.image.url, class:"card-img" %>
-        <% else %>
-          <%= image_tag "default-studio-icon.jpeg", class:"card-img" %>
-        <% end %>
+        <%= image_tag @studio.image.url, class:"card-img" %>
         <div class="card-body">
           <p><%= render "hash_tag" %></p>
           <p class="card-text updated_at">最終更新日：<%= @studio.updated_at %></p>
@@ -69,7 +63,7 @@
       </div>
     <% @reviews.each do |review| %>
     <div class="review row">
-      <div class="icon"><%= image_tag "default-user-icon.jpeg" %></div>
+      <div class="icon"><%= image_tag review.user.image.thumb.url, size:"100×100" %></div>
       <div class="rate">☆<%=review.rate%></div>
       <div class="review_content"><%= review.review %></div>
     </div>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true
   #カラムの名前をmount_uploaderに指定
+  THUMBNAIL_SIZE = [100, 100]
   mount_uploader :image, ImageUploader
   #作ったスタジオ user.create_studiosで呼び出せる
   #(class_nameは子のクラス名を指定、foreign_keyは子が親を呼び出すための外部キーカラム名)
