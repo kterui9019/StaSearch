@@ -4,8 +4,10 @@
       <div class="card">
         <div class="card-header">
           <h3 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" %></h3>
-              <div class="rate"><i class="fas fa-star"></i><%= rating(@reviews) %></div>
+          <div class="rating"><div id="star-head" data-score="<%= rating(@reviews) %>"></div> <p class="rate-score"><%= rating(@reviews) %></p></div>
+
         </div>
+        
         <%= image_tag @studio.image.url, class:"card-img" %>
         <div class="card-body">
           <p><%= render "hash_tag" %></p>
@@ -64,7 +66,7 @@
     <% @reviews.each do |review| %>
     <div class="review row">
       <div class="icon"><%= image_tag review.user.image.thumb.url, size:"100×100" %></div>
-      <div class="rate">☆<%=review.rate%></div>
+      <div class="star-review" data-score="<%= review.rate %>"></div>
       <div class="review_content"><%= review.review %></div>
     </div>
     <% end %>
@@ -107,6 +109,26 @@
   }
   
 </script>
+
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLEMAPS_HTTP_KEY'] %>&callback=initMap">
+</script>
+
+<script>
+$('#star-head').raty({
+  path: '/assets/',
+  readOnly: true,
+  half: true,
+  score: function() {
+          return $(this).attr('data-score');
+        }
+});
+$('.star-review').raty({
+  path: '/assets/',
+  readOnly: true,
+  score: function() {
+          return $(this).attr('data-score');
+        }
+});
+
 </script>

@@ -81,7 +81,7 @@
           <br />
           <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
           <br />
-          <i class="fas fa-star"></i><%= rating(studio.reviews) %> <i class="fas fa-comment-alt"></i><%= studio.reviews.count %>
+          <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->
@@ -89,3 +89,12 @@
   </div><!-- /.row -->
 </div>
   
+<script>
+$('.star-review').raty({
+  path: '/assets/',
+  readOnly: true,
+  score: function() {
+          return $(this).attr('data-score');
+        }
+});
+</script>
