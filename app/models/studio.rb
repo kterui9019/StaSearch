@@ -1,6 +1,4 @@
 class Studio < ApplicationRecord
-  #エリア
-  belongs_to :area
   #作ったユーザとのアソシエーション studio.created_user.name といった形で呼び出せる
   belongs_to :created_user, class_name: "User", optional: true
   #お気に入り
