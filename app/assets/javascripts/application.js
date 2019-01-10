@@ -18,4 +18,5 @@
 //= require jquery_ujs
 //= require underscore
 //= require jquery.raty
+//= require bootstrap-multiselect
 //= require_tree .

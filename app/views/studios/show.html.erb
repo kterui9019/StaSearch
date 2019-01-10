@@ -2,12 +2,10 @@
   <div class="row">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">
-          <h3 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" %></h3>
+        <div class="card-header text-left">
+          <h2 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" %></h2>
           <div class="rating"><div id="star-head" data-score="<%= rating(@reviews) %>"></div> <p class="rate-score"><%= rating(@reviews) %></p></div>
-
         </div>
-        
         <%= image_tag @studio.image.url, class:"card-img" %>
         <div class="card-body">
           <p><%= render "hash_tag" %></p>
@@ -117,8 +115,13 @@
 </script>
 
 <script>
+window.onunload = function(){};
+
 $('#star-head').raty({
-  path: '/assets/',
+  starOn: '<%= asset_path('star-on-big.png') %>',
+  starOff: '<%= asset_path('star-off-big.png') %>',
+  starHalf: '<%= asset_path('star-half-big.png') %>',
+
   readOnly: true,
   half: true,
   score: function() {
@@ -132,5 +135,10 @@ $('.star-review').raty({
           return $(this).attr('data-score');
         }
 });
+window.onpageshow = function(event) {
+	if (event.persisted) {
+		 window.location.reload();
+	}
+};
 
 </script>
