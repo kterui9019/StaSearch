@@ -1,8 +1,5 @@
 <div class="container index-container">
-  <div class="search-container">
-    <%= render 'search_form' %>
-  </div>
-  
+
   <div class="search_query">
   <h4>検索条件</h4>
   <% unless params[:q][:groupings].nil? or params[:q][:groupings].empty? %>
@@ -21,7 +18,7 @@
 
   <div class="row">
     <% @studios.each do |studio| %>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-6 col-lg-4">
       <div class="card img-thumbnail h-100">
         <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
         <div class="card-body px-2 py-3">
@@ -47,6 +44,8 @@
 </div>
 
 <script>
+window.onunload = function(){};
+
 $('.star-review').raty({
   path: '/assets/',
   readOnly: true,
@@ -54,4 +53,10 @@ $('.star-review').raty({
           return $(this).attr('data-score');
         }
 });
+window.onpageshow = function(event) {
+	if (event.persisted) {
+		 window.location.reload();
+	}
+};
+
 </script>

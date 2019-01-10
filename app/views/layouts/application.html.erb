@@ -7,11 +7,11 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+    
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="<%= root_path %>"><i class="fas fa-guitar"></i> スタサーチ</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
@@ -20,15 +20,8 @@
       
         <div class="collapse navbar-collapse" id="Navber">
           <ul class="navbar-nav mr-auto">
-            
           </ul>
           <ul class="navbar-nav">
-            
-            <%= search_form_for(@q, html: { class: 'form-inline my-2 my-lg-0' }, url:search_path) do |f| %>
-                <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"検索..." %>
-                <%= f.submit "検索", class:"btn btn-outline-success my-2 my-sm-0" %>
-            <% end %>
-            
             <% if logged_in? %>
               <li class="nav-item active">
                 <%= link_to "スタジオを投稿する", new_studio_path, class: "nav-link" %>
@@ -47,13 +40,68 @@
                 <%= link_to "ログイン", login_path, class: "nav-link" %>
               </li>
             <% end %>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></button>
+
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>
     </nav>
     <div class="container">
       <%= render 'shared/flash' %>
+      <!-- モーダルウィンドウの中身 -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">スタジオ検索</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <%= search_form_for(@q, html: { class: '.d-none' }, url:search_path) do |f| %>
+                <div class="form-row">
+                  <div class="col-sm-12 offset-sm-0 input-group">
+                    <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"新宿　サンプルスタジオ" %>
+                    <span class="input-group-btn">
+                  		<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal"><i class="fas fa-tags"></i></button>
+                  	</span>
+                  	<%= f.submit "検索", class:"btn btn-primary" %>
+                  </div>
+                </div>
+                <div class="collapse" id="collapseModal">
+                  <div class="card card-body">
+                    <div class="text-center form-check">
+                    　<%= f.collection_check_boxes :hash_tags_id_in, @hash_tags, :id, :tag %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
       <%= yield %>  
   </body>
+  
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.multiselect').multiselect({
+      buttonText: function(options, select) {
+        if (options.length === 0) {
+          return '特徴';
+        }else{
+          return `${options.length} 選択`;
+        }
+      }
+    });
+  });
+</script>
+
+<input type="hidden" id="refresh" value="no">
+<script>
+$(document).ready(function() {
+    var $input = $('#refresh');
+    $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
+});
+</script>
 </html>

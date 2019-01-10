@@ -17,7 +17,7 @@ module StudiosHelper
       reviews.each { |review| rate += review.rate.to_f }
       rate /= reviews.count
     end
-    return rate
+    return rate.round(2)
   end
   
   def show_search_words(words)
