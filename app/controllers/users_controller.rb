@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @studios = @user.favorite_studios.includes(:hash_tags, :hash_tag_relationships, :reviews, :access).paginate(page: params[:page], per_page: 6)
   end
   
   def edit
@@ -50,7 +51,8 @@ class UsersController < ApplicationController
         :name,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :image
         )  
     end
     
