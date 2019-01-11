@@ -1,36 +1,39 @@
 <div class="container user_show_container">
   <div class="row">
-    <aside class="col-md-4">
-      <%= image_tag 'default-user-icon.jpeg', class: "icon-image" %>
+    <aside class="col-md-3">
+      <%= image_tag @user.image.thumb.url, class:"review-icon", size:"100x100" %>
       <h3><%= @user.name %></h3>
       <%= link_to "プロフィール編集", edit_user_path(@user) %> | <%= link_to "退会する", user_path, method: :delete %>
     </aside>
     
-    <div class="col-md-8">
+    <div class="col-md-9">
       <h3>お気に入り</h3>
       <div class="text-right"><%= link_to "スタジオを投稿する", new_studio_path %></div>
-      <div class="row">
-  <% @user.favorite_studios.each do |studio| %>
-  <div class="col-sm-12 col-md-6">
-    <div class="card img-thumbnail">
-      <% if studio.image? %>
-        <%= image_tag studio.image.url, class:"card-img-top" %>
-      <% else %>
-        <%= image_tag "default-studio-icon.jpeg", class:"card-img-top" %>
-      <% end %>
-      <div class="card-body px-2 py-3">
-        <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
-        <p class="card-text">コンテンツ コンテンツ コンテンツ</p>
-        <small><i class="fas fa-map-marker-alt"></i><cite title="<%= studio.address %>"><%= studio.address %> </small>
-        <i class="fas fa-phone"></i> <%= studio.telno %>
-        <br />
-        <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
-        <br />
-      </div><!-- /.card-body -->
-    </div><!-- /.card -->
-  </div><!-- /.col-sm-6.col-md-3 -->
-<% end %>
-</div><!-- /.row -->
+        <div class="row">
+          <% @studios.each do |studio| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card img-thumbnail h-100">
+              <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
+              <div class="card-body px-2 py-3">
+                <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
+                <p class="card-text">
+                  <% studio.hash_tags.each do |hash_tag| %>
+                      <%= hash_tag.tag %>
+                    <% end %>
+                </p>
+                <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
+                <small class="small-block"><i class="fas fa-subway"></i> </td><td><%= studio.access.name %></small>
+                <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
+                <div class="score-review"><%= rating(studio.reviews) %></div>
+                <p class="count-review"><i class="fa fa-comments"></i> <%= studio.reviews.count %></p>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+          </div><!-- /.col-sm-6.col-md-3 -->
+        <% end %>
+        
+      </div><!-- /.row -->
+        <%= will_paginate(@studios, class: "pagination justify-content-center", 
+                              renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
     </div>
   </div>
 </div>

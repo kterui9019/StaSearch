@@ -9,7 +9,8 @@
         <%= image_tag @studio.image.url, class:"card-img", size:"400x400" %>
         <div class="card-body">
           <p><i class="fas fa-tags"></i> <%= render "hash_tag" %>|</p>
-          <p class="card-text updated_at">最終更新日：<%= @studio.updated_at %></p>
+          
+          <p class="card-text updated_at"><%= link_to "編集", edit_studio_path %> | 最終更新日：<%= @studio.updated_at %></p>
         </div>
       </div><!-- card -->
     </div><!-- col -->
@@ -81,8 +82,9 @@
       </div>
     </div>
   </div>
-  
-  <a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>
+  <% if logged_in? %>
+    <%= link_to "削除する", studio_path(@studio), method: :delete if current_user.id == @studio.created_user.id %>
+  <% end %>
 </div>
 
 

@@ -28,10 +28,11 @@
               <%= hash_tag.tag %>
             <% end %>
           </p>
-          <small><i class="fas fa-map-marker-alt"></i><cite title="<%= studio.address %>"><%= studio.address %> </small>
-          <i class="fas fa-subway"></i></td><td><%= studio.access.name %>
-          <br />
+          <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
+          <small class="small-block"><i class="fas fa-subway"></i> </td><td><%= studio.access.name %></small>
           <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
+          <div class="score-review"><%= rating(studio.reviews) %></div>
+          <p class="count-review"><i class="fa fa-comments"></i> <%= studio.reviews.count %></p>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->
