@@ -1,6 +1,6 @@
 require "date"
 
-tags =['#料金が安い', '#設備がキレイ', '#エフェクターレンタル可','#待合室が広い','#wi-fi有', '#24時間営業']
+tags =['料金が安い', '設備がキレイ', 'エフェクターレンタル可','待合室が広い','wi-fi有', '24時間営業']
 
 tags.each do |tag|
   HashTag.create!(tag: tag)
@@ -69,6 +69,22 @@ locations.each do |location|
       studio.remote_image_url = url
     end
     studio.save
+    
+    #アクセス情報の登録
+    x = studio.longitude
+    y = studio.latitude
+    access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
+    access_res = HTTP.get(access_uri).to_s
+    access_response = JSON.parse(access_res)
+    access = Access.new(
+      name: access_response[0]["name"],
+      line: access_response[0]["line"],
+      distanceKm: access_response[0]["distanceKm"],
+      traveltime: access_response[0]["traveltime"],
+      studio_id: studio.id
+      )
+    access.save
+    
   end
 
   #レスポンスにnext_page_tokenがある場合（21件以上ある場合）
@@ -104,6 +120,20 @@ locations.each do |location|
           studio.remote_image_url = url
         end
         studio.save
+        #アクセス情報の登録
+        x = studio.longitude
+        y = studio.latitude
+        access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
+        access_res = HTTP.get(access_uri).to_s
+        access_response = JSON.parse(access_res)
+        access = Access.new(
+          name: access_response[0]["name"],
+          line: access_response[0]["line"],
+          distanceKm: access_response[0]["distanceKm"],
+          traveltime: access_response[0]["traveltime"],
+          studio_id: studio.id
+          )
+        access.save
       end
       if response.has_key?("next_page_token") == true
         token =response["next_page_token"] 

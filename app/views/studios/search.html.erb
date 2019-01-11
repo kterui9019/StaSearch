@@ -29,9 +29,7 @@
             <% end %>
           </p>
           <small><i class="fas fa-map-marker-alt"></i><cite title="<%= studio.address %>"><%= studio.address %> </small>
-          <i class="fas fa-phone"></i> <%= studio.telno %>
-          <br />
-          <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
+          <i class="fas fa-subway"></i></td><td><%= studio.access.name %>
           <br />
           <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
         </div><!-- /.card-body -->

@@ -35,6 +35,9 @@
             </tr>
             -->
             <tr align="left">
+              <td><i class="fas fa-subway"></i></td><td><%= @studio.access.name %></td>
+            </tr>
+            <tr align="left">
               <td><i class="fas fa-phone"></i></td><td><%= @studio.telno %></td>
             </tr>
             <tr align="left">
@@ -50,6 +53,12 @@
         <div class="card-body">
           <div id="map" style='width: 100%; height: 28vh;'></div>
         </div>
+        <p class="access">
+          <%= @studio.access.line %><%= @studio.access.name %>から<%= @studio.access.distanceKm %>
+        </p>
+        <p class="access">
+          <%= @studio.access.traveltime %>
+        </p>
       </div>
     </div>
     
