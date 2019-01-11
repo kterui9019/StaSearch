@@ -13,11 +13,11 @@
   </div>
   
   <div class="search-number-container">
-    <p class="search-number"><%= show_current_number(@studios.current_page,@studios.size) %>件を表示 ／ 全<%= @studios.total_entries %>件</p>
+    <p class="search-number"><%= show_current_number(@q_studios.current_page,@q_studios.size) %>件を表示 ／ 全<%= @q_studios.total_entries %>件</p>
   </div>
 
   <div class="row">
-    <% @studios.each do |studio| %>
+    <% @q_studios.each do |studio| %>
     <div class="col-sm-12 col-md-6 col-lg-4">
       <div class="card img-thumbnail h-100">
         <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
@@ -40,7 +40,7 @@
   <% end %>
   </div><!-- /.row -->
 
-  <%= will_paginate(@studios, class: "pagination justify-content-center", 
+  <%= will_paginate(@q_studios, class: "pagination justify-content-center", 
                               renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>
 
