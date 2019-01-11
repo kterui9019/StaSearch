@@ -1,6 +1,7 @@
 <div class="container new_studio_container">
-  <h1>edit page</h1>
+  <h1>編集フォーム</h1>
   <%= form_for(@studio) do |f| %>
+    <% if current_user.id == @studio.created_user.id %>
     <div class="form-group">
       <%= f.label :スタジオ名 %>
       <%= f.text_field :name, class: "form-control" %>
@@ -9,6 +10,7 @@
       <%= f.label :住所 %>
       <%= f.text_field :address, class: "form-control" %>
     </div>
+    <% end %>
     <div class="form-group">
       <%= f.label :スタジオの画像 %></br>
       <%= f.file_field :image %>

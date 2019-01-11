@@ -4,19 +4,9 @@ class StudiosController < ApplicationController
   # get /studios
   def index
     @q = Studio.search(search_params)
-    @studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews).paginate(page: params[:page], per_page: 9)
-  end
-  
-  def search
-=begin
-    @q = Studio.search(search_params)
-    @areas = Area.all
-    @hash_tags = HashTag.all
-=end
-    @q = Studio.search(search_params)
     @q_studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :access).paginate(page: params[:page], per_page: 9)
   end
-  
+
   # post /studios
   def create
     @studio = Studio.new(studio_params)
