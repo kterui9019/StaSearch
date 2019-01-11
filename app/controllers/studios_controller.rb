@@ -21,6 +21,7 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(studio_params)
     @studio.created_user_id = @current_user.id
+    geocode(@studio)
     if @studio.save
       @studio.regist_hash_tag(params[:studio][:hash_tags])
       flash[:success] = "スタジオの登録に成功しました！"
@@ -60,6 +61,7 @@ class StudiosController < ApplicationController
   def update
     @studio = Studio.find(params[:id])
     @studio.update_attributes(studio_params)
+    geocode(@studio)
     if @studio.save
       flash[:success] = "スタジオの編集に成功しました！"
       redirect_to studio_path(@studio)
@@ -93,5 +95,14 @@ class StudiosController < ApplicationController
                                      {:hash_tag_ids => []}
                                      )
     end
-  
+    
+    def geocode(studio)
+      uri = URI.escape("https://maps.googleapis.com/maps/api/geocode/json?address="+studio.address.gsub(" ", "")+"&key=#{ENV['GOOGLEMAPS_IP_KEY']}")
+      res = HTTP.get(uri).to_s
+      response = JSON.parse(res)
+      studio.place_id  = response["results"][0]["place_id"]
+      studio.latitude  = response["results"][0]["geometry"]["location"]["lat"]
+      studio.longitude = response["results"][0]["geometry"]["location"]["lng"]
+    end
+    
 end
