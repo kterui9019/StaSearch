@@ -3,7 +3,7 @@
     <div class="container">
       <h1>さあ、スタジオを探そう</h1>
       <p>スタサーチはエリアや特徴からスタジオを探すことができます。</p>
-      <%= search_form_for(@q, html: { class: '' }, url:search_path) do |f| %>
+      <%= search_form_for(@q, html: { class: '' }, url:studios_path) do |f| %>
         <div class="form-row">
           <div class="col-sm-6 offset-sm-3 input-group">
             <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"新宿　サンプルスタジオ" %>
@@ -30,7 +30,7 @@
   <h2>エリアから探す</h2>
   <div class="row">
     <div class="col-sm-6 col-md-3">
-      <%= link_to search_path(q: { name_or_address_cont: "新宿" }), class: "card area-card h-100" do %>
+      <%= link_to studios_path(q: { name_or_address_cont: "新宿" }), class: "card area-card h-100" do %>
         <%= image_tag "shinjuku.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>新宿</h3>
@@ -39,7 +39,7 @@
       <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <%= link_to search_path(q: { name_or_address_cont: "渋谷" }), class: "card area-card h-100" do %>
+      <%= link_to studios_path(q: { name_or_address_cont: "渋谷" }), class: "card area-card h-100" do %>
         <%= image_tag "shibuya.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>渋谷</h3>
@@ -48,7 +48,7 @@
       <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <%= link_to search_path(q: { name_or_address_cont: "池袋" }), class: "card area-card h-100" do %>
+      <%= link_to studios_path(q: { name_or_address_cont: "池袋" }), class: "card area-card h-100" do %>
         <%= image_tag "ikebukuro.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>池袋</h3>
@@ -57,7 +57,7 @@
       <% end %>
     </div>
     <div class="col-sm-6 col-md-3">
-      <%= link_to search_path(q: { name_or_address_cont: "秋葉原" }), class: "card area-card h-100" do %>
+      <%= link_to studios_path(q: { name_or_address_cont: "秋葉原" }), class: "card area-card h-100" do %>
         <%= image_tag "akihabara.jpg", class: "card-img-top" %>
         <div class="card-body">
           <h3>秋葉原</h3>
@@ -75,17 +75,16 @@
         <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
         <div class="card-body px-2 py-3">
           <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
-          <p class="card-text">
-            <% studio.hash_tags.each do |hash_tag| %>
-              <%= hash_tag.tag %>
-            <% end %>
-          </p>
           <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
           <small class="small-block"><i class="fas fa-subway"></i> </td><td><%= studio.access.name %></small>
           <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
           <div class="score-review"><%= rating(studio.reviews) %></div>
           <p class="count-review"><i class="fa fa-comments"></i> <%= studio.reviews.count %></p>
-      
+          <p class="hash_tags"><i class="fas fa-tags"></i> 
+            <% studio.hash_tags.each do |hash_tag| %>
+              <%= hash_tag.tag %>
+            <% end %>
+          </p>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->

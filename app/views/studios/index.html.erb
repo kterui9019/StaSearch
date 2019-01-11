@@ -1,37 +1,62 @@
 <div class="container index-container">
-  <div class="search-container">
-    <%= render 'search_form' %>
+
+  <div class="search_query">
+  <h4>検索条件</h4>
+  <% unless params[:q][:groupings].nil? or params[:q][:groupings].empty? %>
+    <% words = params[:q][:groupings] %>
+    検索ワード:<%= show_search_words(words) %>
+  <% end %>
+  <br>
+  <% unless params[:q][:hash_tags_id_in].nil? or params[:q][:hash_tags_id_in].reject(&:blank?).empty? %>
+    ハッシュタグ:<%= params[:q][:hash_tags_id_in].reject(&:blank?).map{|hash_tag_id| HashTag.find(hash_tag_id).tag}.join(', ') %>
+  <% end %>
   </div>
+  
   <div class="search-number-container">
-    <p class="search-number"><%= show_current_number(@studios.current_page,@studios.size) %>件を表示 ／ 全<%= @studios.total_entries %>件</p>
+    <p class="search-number"><%= show_current_number(@q_studios.current_page,@q_studios.size) %>件を表示 ／ 全<%= @q_studios.total_entries %>件</p>
   </div>
+
   <div class="row">
-    <% @studios.each do |studio| %>
-    <div class="col-sm-12 col-md-4">
+    <% @q_studios.each do |studio| %>
+    <div class="col-sm-12 col-md-6 col-lg-4">
       <div class="card img-thumbnail h-100">
-        <% if studio.image? %>
-          <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
-        <% else %>
-          <%= image_tag "default-studio-icon.jpeg", class:"card-img-top", size:"300x250" %>
-        <% end %>
+        <%= image_tag studio.image.url, class:"card-img-top", size:"300x250" %>
         <div class="card-body px-2 py-3">
           <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
-          <p class="card-text">
+          <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
+          <small class="small-block"><i class="fas fa-subway"></i> </td><td><%= studio.access.name %></small>
+          <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
+          <div class="score-review"><%= rating(studio.reviews) %></div>
+          <p class="count-review"><i class="fa fa-comments"></i> <%= studio.reviews.count %></p>
+          <p class="hash_tags"><i class="fas fa-tags"></i> 
             <% studio.hash_tags.each do |hash_tag| %>
               <%= hash_tag.tag %>
             <% end %>
           </p>
-          <small><i class="fas fa-map-marker-alt"></i><cite title="<%= studio.address %>"><%= studio.address %> </small>
-          <i class="fas fa-phone"></i> <%= studio.telno %>
-          <br />
-          <i class="fas fa-globe-europe"></i> <a href="<%= studio.url %>"><%= studio.url %></a>
-          <br />
-          <i class="fas fa-star"></i><%= rating(studio.reviews) %> <i class="fas fa-comment-alt"></i><%= studio.reviews.count %>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div><!-- /.col-sm-6.col-md-3 -->
   <% end %>
   </div><!-- /.row -->
-  <%= will_paginate(@studios, class: "pagination justify-content-center", 
+
+  <%= will_paginate(@q_studios, class: "pagination justify-content-center", 
                               renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 </div>
+
+<script>
+window.onunload = function(){};
+
+$('.star-review').raty({
+  path: '/assets/',
+  readOnly: true,
+  score: function() {
+          return $(this).attr('data-score');
+        }
+});
+window.onpageshow = function(event) {
+	if (event.persisted) {
+		 window.location.reload();
+	}
+};
+
+</script>

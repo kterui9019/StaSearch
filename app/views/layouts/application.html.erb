@@ -57,7 +57,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-              <%= search_form_for(@q, html: { class: '.d-none' }, url:search_path) do |f| %>
+              <%= search_form_for(@q, html: { class: '.d-none' }, url:studios_path) do |f| %>
                 <div class="form-row">
                   <div class="col-sm-12 offset-sm-0 input-group">
                     <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"新宿　サンプルスタジオ" %>
