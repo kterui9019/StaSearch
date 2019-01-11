@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :log_in_user
+  
   def new
     @review = Review.new
     @studio = Studio.find(params[:studio_id])

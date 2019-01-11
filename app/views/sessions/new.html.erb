@@ -1,19 +1,19 @@
 <div class="container login-container">
   <div class="login-form">
-    <h1>Login</h1>
+    <h1>ログイン</h1>
     <%= form_for(:session, url: login_path) do |f| %>
       <div class="form-group">
-        <%= f.label :email %>
+        <%= f.label :メールアドレス %>
         <%= f.email_field :email, class:"form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :password %>
+        <%= f.label :パスワード %>
         <%= f.password_field :password, class:"form-control" %>
       </div>
       <div class="form-group">
         <%= f.label :remember_me, class: "checkbox inline" do %>
           <%= f.check_box :remember_me %>
-          <span>Remember me on this computer</span>
+          <span>ログイン情報を記憶</span>
         <% end %>
       </div>
       <div class="text-center">
