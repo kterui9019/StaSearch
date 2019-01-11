@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_140333) do
+ActiveRecord::Schema.define(version: 2019_01_11_002628) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_140333) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "rate"
+    t.string "title"
   end
 
   create_table "studios", force: :cascade do |t|

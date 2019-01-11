@@ -96,6 +96,9 @@ small {
   
     .card{
       margin: 20px 0;
+      .pagination{
+        margin-top: 10px;
+      }
       #favorite_form{
         margin-left:10px;
       }
@@ -110,7 +113,30 @@ small {
         font-size: 28px;
         margin-left: 5px;
       }
-        
+      .review{
+        padding: 30px;
+        .balloon{
+          position: relative;
+          padding: 20px;
+          background-color: #e2e2e2;
+          .review_title{
+            font-size: 20px;
+            font-weight:bold;
+          }
+        }
+        .balloon::before{
+          content: '';
+          position: absolute;
+          display: block;
+          width: 0;
+          height: 0;
+          left: -15px;
+          top: 15px;
+          border-right: 15px solid #e2e2e2;
+          border-top: 15px solid transparent;
+          border-bottom: 15px solid transparent;
+        }
+      }
     }  
   
   text-align: center;
@@ -173,5 +199,4 @@ small {
       display: inline-block;
     }
   }
-  
 }
