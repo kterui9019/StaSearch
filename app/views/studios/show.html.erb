@@ -58,25 +58,21 @@
   
 
   <div class="row">
-    <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        口コミ一覧　<div class="reviews_count">全<%= @reviews.count %>件</div>
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          レビュー　全<%= @reviews.count %>件
+          <%= render "more" %>
+        </div>
+        <div id="reviews">
+          <%= render "reviews" %>
+        </div>
+        
+        <%= link_to "レビューを投稿", new_review_path(studio_id: @studio.id) %>
       </div>
-    <% @reviews.each do |review| %>
-    <div class="review row">
-      <div class="icon"><%= image_tag review.user.image.thumb.url, size:"100×100" %></div>
-      <div class="star-review" data-score="<%= review.rate %>"></div>
-      <div class="review_content"><%= review.review %></div>
-    </div>
-    <% end %>
-    
-    <%= link_to "口コミを投稿", new_review_path(studio_id: @studio.id) %>
-    </div>
     </div>
   </div>
   
-
   <a href="<%= edit_studio_path %>">編集画面へ</a> | <%= link_to "削除する", studio_path(@studio), method: :delete %>
 </div>
 
@@ -115,8 +111,6 @@
 </script>
 
 <script>
-window.onunload = function(){};
-
 $('#star-head').raty({
   starOn: '<%= asset_path('star-on-big.png') %>',
   starOff: '<%= asset_path('star-off-big.png') %>',
@@ -135,10 +129,4 @@ $('.star-review').raty({
           return $(this).attr('data-score');
         }
 });
-window.onpageshow = function(event) {
-	if (event.persisted) {
-		 window.location.reload();
-	}
-};
-
 </script>

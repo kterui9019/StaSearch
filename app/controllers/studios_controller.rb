@@ -47,9 +47,9 @@ class StudiosController < ApplicationController
     @favorite = Favorite.new 
     @studio = Studio.find(params[:id])
     @hash_tags = @studio.hash_tags
-    @reviews   = @studio.reviews
+    @reviews   = @studio.reviews.paginate(page: params[:page], per_page: 2)
   end
-  
+
   # patch /studios/:id
   def update
     @studio = Studio.find(params[:id])

@@ -2,6 +2,11 @@
 
 <h1>レビュー投稿</h1>
 <%= form_for [@review] do |f| %>
+  <div class="form-group">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  
   <div class="field" id="rate">
     <%= f.label :評価 %>
     <%= f.hidden_field :rate, id: :review_rate %>
