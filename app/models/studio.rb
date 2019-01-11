@@ -10,6 +10,8 @@ class Studio < ApplicationRecord
   #レビュー
   has_many :review_relationships
   has_many :reviews, through: :review_relationships
+  #アクセス
+  has_one :access
 
   #カラムの名前をmount_uploaderに指定
   THUMBNAIL_SIZE = [300, 250]
@@ -35,14 +37,4 @@ class Studio < ApplicationRecord
     end
   end
   
-  private
-    def geocode
-      debugger
-      uri = URI.escape("https://maps.googleapis.com/maps/api/geocode/json?address="+self.address.gsub(" ", "")+"&key=#{ENV['GOOGLEMAPS_IP_KEY']}")
-      res = HTTP.get(uri).to_s
-      response = JSON.parse(res)
-      self.place_id  = response["results"][0]["place_id"]
-      self.latitude  = response["results"][0]["geometry"]["location"]["lat"]
-      self.longitude = response["results"][0]["geometry"]["location"]["lng"]
-    end
 end

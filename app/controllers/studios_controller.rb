@@ -23,6 +23,7 @@ class StudiosController < ApplicationController
     @studio.created_user_id = @current_user.id
     geocode(@studio)
     if @studio.save
+      create_access(@studio)
       @studio.regist_hash_tag(params[:studio][:hash_tags])
       flash[:success] = "スタジオの登録に成功しました！"
       redirect_to studio_path(@studio)
@@ -44,11 +45,6 @@ class StudiosController < ApplicationController
     @hash_tags = @studio.hash_tags
   end
   
-  def edit_hash_tags
-    @studio = Studio.find(params[:id])
-    @hash_tags = @studio.hash_tags
-  end
-  
   # get /studios/:id
   def show
     @favorite = Favorite.new 
@@ -60,9 +56,9 @@ class StudiosController < ApplicationController
   # patch /studios/:id
   def update
     @studio = Studio.find(params[:id])
-    @studio.update_attributes(studio_params)
-    geocode(@studio)
-    if @studio.save
+    if  @studio.update_attributes(studio_params)
+      geocode(@studio)
+      update_access(@studio)
       flash[:success] = "スタジオの編集に成功しました！"
       redirect_to studio_path(@studio)
     else
@@ -105,4 +101,34 @@ class StudiosController < ApplicationController
       studio.longitude = response["results"][0]["geometry"]["location"]["lng"]
     end
     
+    def create_access(studio)
+      x = studio.longitude
+      y = studio.latitude
+      access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
+      access_res = HTTP.get(access_uri).to_s
+      access_response = JSON.parse(access_res)
+      access = Access.new(
+        name: access_response[0]["name"],
+        line: access_response[0]["line"],
+        distanceKm: access_response[0]["distanceKm"],
+        traveltime: access_response[0]["traveltime"],
+        studio_id: studio.id
+        )
+      access.save
+    end
+    
+    def update_access(studio)
+      x = studio.longitude
+      y = studio.latitude
+      access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
+      access_res = HTTP.get(access_uri).to_s
+      access_response = JSON.parse(access_res)
+      studio.access.update_attributes(
+        name: access_response[0]["name"],
+        line: access_response[0]["line"],
+        distanceKm: access_response[0]["distanceKm"],
+        traveltime: access_response[0]["traveltime"],
+        studio_id: studio.id
+      )
+    end
 end
