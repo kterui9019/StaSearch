@@ -40,6 +40,12 @@ class StudiosController < ApplicationController
   # get /studios/:id/edit
   def edit
     @studio = Studio.find(params[:id])
+    @hash_tags = @studio.hash_tags
+  end
+  
+  def edit_hash_tags
+    @studio = Studio.find(params[:id])
+    @hash_tags = @studio.hash_tags
   end
   
   # get /studios/:id
@@ -83,7 +89,9 @@ class StudiosController < ApplicationController
                                      :telno,
                                      :url,
                                      :latitude,
-                                     :longitude)
+                                     :longitude,
+                                     {:hash_tag_ids => []}
+                                     )
     end
   
 end
