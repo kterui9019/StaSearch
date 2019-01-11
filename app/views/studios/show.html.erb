@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header text-left">
-          <h2 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" %></h2>
+          <h2 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" if logged_in? %></h2>
           <div class="rating"><div id="star-head" data-score="<%= rating(@reviews) %>"></div> <p class="rate-score"><%= rating(@reviews) %></p></div>
         </div>
         <%= image_tag @studio.image.url, class:"card-img" %>

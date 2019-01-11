@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :log_in_user, only:[:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
