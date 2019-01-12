@@ -61,13 +61,13 @@ ActiveRecord::Schema.define(version: 2019_01_11_084752) do
   create_table "studios", force: :cascade do |t|
     t.string "name"
     t.string "address"
+    t.decimal "latitude", precision: 12, scale: 9
+    t.decimal "longitude", precision: 12, scale: 9
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "telno"
     t.string "url"
     t.integer "created_user_id"
-    t.float "latitude"
-    t.float "longitude"
     t.string "image"
     t.string "place_id"
   end

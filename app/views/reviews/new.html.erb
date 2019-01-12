@@ -1,6 +1,9 @@
+<% content_for(:html_title) { 'レビュー投稿' } %>
 <div class="container">
 
 <h1>レビュー投稿</h1>
+<%= render "error_messages" %>
+
 <%= form_for [@review] do |f| %>
   <div class="form-group">
     <%= f.label :タイトル %>

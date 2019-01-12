@@ -52,7 +52,7 @@ class StudiosController < ApplicationController
       flash[:success] = "スタジオの編集に成功しました！"
       redirect_to studio_path(@studio)
     else
-      flash[:danger] = "スタジオの編集に失敗しました。"
+      flash.now[:danger] = "スタジオの編集に失敗しました。"
       render 'edit'
     end
   end
@@ -92,8 +92,8 @@ class StudiosController < ApplicationController
     end
     
     def create_access(studio)
-      x = studio.longitude
-      y = studio.latitude
+      x = studio.longitude.to_f
+      y = studio.latitude.to_f
       access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
       access_res = HTTP.get(access_uri).to_s
       access_response = JSON.parse(access_res)
@@ -104,16 +104,16 @@ class StudiosController < ApplicationController
         traveltime: access_response[0]["traveltime"],
         studio_id: studio.id
         )
-      access.save
+      access&.save
     end
     
     def update_access(studio)
-      x = studio.longitude
-      y = studio.latitude
+      x = studio.longitude.to_f
+      y = studio.latitude.to_f
       access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
       access_res = HTTP.get(access_uri).to_s
       access_response = JSON.parse(access_res)
-      studio.access.update_attributes(
+      studio.access&.update_attributes(
         name: access_response[0]["name"],
         line: access_response[0]["line"],
         distanceKm: access_response[0]["distanceKm"],

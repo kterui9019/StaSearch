@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StudioApp</title>
+    <title><%= content_for?(:html_title) ? yield(:html_title) + " | スタサーチ" : "スタサーチ" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
@@ -81,6 +81,12 @@
       </div>
     </div>
       <%= yield %>  
+    <footer class="footer">
+      <div class="container text-center">
+        <p class="text-muted">©2019 StaSearch All Rights Reserved.</p>
+      </div>
+    </footer>
+
   </body>
   
 <script type="text/javascript">
