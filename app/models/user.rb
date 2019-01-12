@@ -2,7 +2,11 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   before_save {email.downcase! }
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: {case_sensitive: false}
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+
   has_secure_password
   validates :password, presence: true
   #カラムの名前をmount_uploaderに指定
@@ -15,7 +19,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_studios, through: :favorites, source: :studio
   #レビュー
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   
 
   #トークンを生成するメソッド

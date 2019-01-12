@@ -1,0 +1,32 @@
+<%= render "error_messages" %>
+<%= form_for(@studio) do |f| %>
+    <div class="form-group">
+      <%= f.label :スタジオ名 %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :住所 %>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :電話番号 %>
+      <%= f.text_field :telno, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :URL %>
+      <%= f.text_field :url, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :スタジオの画像 %></br>
+      <%= f.file_field :image %>
+    </div>
+    <div class="form-group">
+      <%= f.label :ハッシュタグ %></br>
+      <div class="form-check form-check-inline">
+        <%= collection_check_boxes(:studio, :hash_tag_ids, HashTag.all, :id, :tag) do |b| %>
+          <%= b.label { b.check_box + b.text } %>
+        <% end %>
+      </div>
+    </div>
+    <%= f.submit "送信", class: "btn btn-primary" %>
+  <% end %>

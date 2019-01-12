@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      studio: スタジオ
+      reviews: レビュー
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        image: アイコン画像
+      studio:
+        name: スタジオ名
+        address: 住所
+        telno: 電話番号
+        url : URL
+        image: スタジオ画像
+      review:
+        title: タイトル
+        review: レビュー内容
+        rate: 評価

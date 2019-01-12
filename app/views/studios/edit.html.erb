@@ -1,28 +1,10 @@
+<% content_for(:html_title) { 'スタジオ編集' } %>
+
 <div class="container new_studio_container">
   <h1>編集フォーム</h1>
-  <%= form_for(@studio) do |f| %>
-    <% if current_user.id == @studio.created_user.id %>
-    <div class="form-group">
-      <%= f.label :スタジオ名 %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :住所 %>
-      <%= f.text_field :address, class: "form-control" %>
-    </div>
-    <% end %>
-    <div class="form-group">
-      <%= f.label :スタジオの画像 %></br>
-      <%= f.file_field :image %>
-    </div>
-    <div class="form-group">
-      <%= f.label :ハッシュタグ %></br>
-      <div class="form-check form-check-inline">
-        <%= collection_check_boxes(:studio, :hash_tag_ids, HashTag.all, :id, :tag) do |b| %>
-          <%= b.label { b.check_box + b.text } %>
-        <% end %>
-      </div>
-    </div>
-    <%= f.submit "送信", class: "btn btn-primary" %>
+  <% if current_user.id == @studio.created_user.id %>
+    <%= render "form" %>
+  <% else %>
+    <%= render "limited_form" %>
   <% end %>
 </div>

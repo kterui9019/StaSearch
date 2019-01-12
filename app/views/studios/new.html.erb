@@ -1,5 +1,7 @@
+<% content_for(:html_title) { 'スタジオ登録' } %>
 <div class="container new_studio_container">
-  <h1>new page</h1>
+  <h1>新規スタジオ登録</h1>
+  <%= render "error_messages" %>
   <%= form_for(@studio) do |f| %>
     <div class="form-group">
       <%= f.label :スタジオ名 %>
@@ -8,6 +10,14 @@
     <div class="form-group">
       <%= f.label :住所 %>
       <%= f.text_field :address, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :電話番号 %>
+      <%= f.text_field :telno, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :URL %>
+      <%= f.text_field :url, class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :スタジオの画像 %></br>

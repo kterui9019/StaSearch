@@ -26,6 +26,7 @@ gem 'http'
 gem 'openssl'
 gem 'dotenv-rails'
 gem 'ransack'
+gem 'rails-i18n'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
