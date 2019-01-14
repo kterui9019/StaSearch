@@ -6,7 +6,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
    # リサイズしたり画像形式を変更するのに必要
   include CarrierWave::RMagick
-  
+
+=begin
   version :thumb, if: :has_thumbnail? do
     process :dynamic_resize_to_fit
   end
@@ -19,7 +20,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   def has_thumbnail? new_file
     model.class::const_defined? :THUMBNAIL_SIZE
   end
- 
+=end
  
  # 画像の上限を480x480にする
   process :resize_to_limit => [480, 480]

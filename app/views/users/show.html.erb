@@ -3,7 +3,7 @@
 <div class="container user_show_container">
   <div class="row">
     <aside class="col-md-3">
-      <%= image_tag @user.image.thumb.url, class:"review-icon", size:"100x100" %>
+      <%= image_tag @user.image.url, class:"review-icon", size:"100x100" %>
       <h3><%= @user.name %></h3>
       <%= link_to "プロフィール編集", edit_user_path(@user) %> | <%= link_to "退会する", user_path, method: :delete %>
     </aside>

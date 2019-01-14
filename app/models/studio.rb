@@ -14,7 +14,7 @@ class Studio < ApplicationRecord
   has_one :access, dependent: :destroy
 
   #カラムの名前をmount_uploaderに指定
-  THUMBNAIL_SIZE = [300, 250]
+  #THUMBNAIL_SIZE = [300, 250]
   mount_uploader :image, ImageUploader
   
   validates :name, presence: true, length: { maximum: 50 }
