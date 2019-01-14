@@ -48,7 +48,11 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     if  @studio.update_attributes(studio_params)
       geocode(@studio)
-      update_access(@studio)
+      if @studio.access.nil?
+        create_access(@studio)
+      else
+        update_access(@studio)
+      end
       flash[:success] = "スタジオの編集に成功しました！"
       redirect_to studio_path(@studio)
     else
