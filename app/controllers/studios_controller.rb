@@ -11,8 +11,8 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(studio_params)
     @studio.created_user_id = @current_user.id
-    save_photo(@studio.place_id) if @studio.image.blank?
     geocode(@studio)
+    save_photo(@studio) if @studio.image.blank?
     if @studio.save
       create_access(@studio)
       @studio.regist_hash_tag(params[:studio][:hash_tags])
@@ -98,12 +98,12 @@ class StudiosController < ApplicationController
       studio.longitude = response["results"][0]["geometry"]["location"]["lng"]
     end
     
-    def save_photo(place_id)
-      uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/details/json?placeid=#{place_id}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
+    def save_photo(studio)
+      uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/details/json?placeid=#{studio.place_id}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
       res = HTTP.get(uri).to_s
       response = JSON.parse(res)
       result = response["result"]
-      if result.has_key?("photos")
+      if result&.has_key?("photos")
         photo_reference = result['photos'][0]['photo_reference'] 
         url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=#{photo_reference}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
         studio.remote_image_url = url
