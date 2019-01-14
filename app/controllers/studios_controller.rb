@@ -60,7 +60,8 @@ class StudiosController < ApplicationController
   # delete /studios/:id
   def destroy
     Studio.find(params[:id]).destroy
-    redirect_to studios_path
+    flash[:success] = "スタジオの削除に成功しました。"
+    redirect_to user_path(current_user)
   end
   
   private
