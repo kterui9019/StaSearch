@@ -24,4 +24,4 @@ production:
   <<: *default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: 5heroku db:push sqlite://db/database.sqlite3
