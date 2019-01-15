@@ -1,4 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
+  include Cloudinary::CarrierWave
 
   def default_url
     "default-#{model.class.to_s.underscore}-icon.jpeg"
@@ -75,3 +76,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
 end
+
