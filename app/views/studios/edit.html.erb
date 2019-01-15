@@ -1,10 +1,14 @@
 <% content_for(:html_title) { 'スタジオ編集' } %>
 
-<div class="container new_studio_container">
-  <h1>編集フォーム</h1>
+<div class="container studio-container">
+  <h2>編集フォーム</h2>
+  <div class="row">
+  <div class="col-md-8 offset-md-2 col-sm-12">
   <% if current_user.id == @studio.created_user.id %>
     <%= render "form" %>
   <% else %>
     <%= render "limited_form" %>
   <% end %>
+  </div>
+  </div>
 </div>

@@ -1,7 +1,8 @@
 <% content_for(:html_title) { 'ログイン' } %>
-<div class="container login-container">
-  <div class="login-form">
-    <h1>ログイン</h1>
+<div class="container user-container">
+  <h2>ログイン</h2>
+  <div class="login-form row">
+    <div class="col-md-8 offset-md-2 col-sm-12" >
     <%= form_for(:session, url: login_path) do |f| %>
       <div class="form-group">
         <%= f.label :メールアドレス %>
@@ -21,5 +22,6 @@
         <%= f.submit "ログイン", class: "btn btn-primary" %>
       </div>
     <% end %>
+    </div>
   </div>
 </div>
