@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_084752) do
+ActiveRecord::Schema.define(version: 2019_01_15_085414) do
 
   create_table "accesses", force: :cascade do |t|
     t.string "name"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2019_01_11_084752) do
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "studio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fees", force: :cascade do |t|
+    t.string "fee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +76,11 @@ ActiveRecord::Schema.define(version: 2019_01_11_084752) do
     t.integer "created_user_id"
     t.string "image"
     t.string "place_id"
+    t.string "open"
+    t.string "close"
+    t.integer "weekday_fee_id"
+    t.integer "holiday_fee_id"
+    t.string "remarks"
   end
 
   create_table "users", force: :cascade do |t|

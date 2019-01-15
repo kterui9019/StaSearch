@@ -82,6 +82,20 @@ body{
     margin-bottom: 50px;
     text-align: center;
   }
+  .time-select-group{
+    .col-xs-2{
+      margin:0 16px;
+    }
+    p{
+      display:inline-block;
+      margin-top:5px;
+    }
+    .form-control{
+      width: auto;
+      display:inline-block;
+    }
+  }
+
   .btn{
     margin-top: 15px;
   }

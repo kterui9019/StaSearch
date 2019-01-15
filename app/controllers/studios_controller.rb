@@ -9,10 +9,13 @@ class StudiosController < ApplicationController
 
   # post /studios
   def create
+    #debugger
     @studio = Studio.new(studio_params)
     @studio.created_user_id = @current_user.id
     geocode(@studio)
     save_photo(@studio) if @studio.image.blank?
+    set_time(@studio)
+    #debugger
     if @studio.save
       create_access(@studio)
       @studio.regist_hash_tag(params[:studio][:hash_tags])
@@ -50,6 +53,7 @@ class StudiosController < ApplicationController
     @studio.assign_attributes(studio_params)
     geocode(@studio)
     save_photo(@studio)
+    set_time(@studio)
       if @studio.access.nil?
         create_access(@studio)
       else
@@ -86,6 +90,9 @@ class StudiosController < ApplicationController
                                      :url,
                                      :latitude,
                                      :longitude,
+                                     :remarks,
+                                     :weekday_fee_id,
+                                     :holiday_fee_id,
                                      {:hash_tag_ids => []}
                                      )
     end
@@ -140,5 +147,10 @@ class StudiosController < ApplicationController
         traveltime: access_response[0]["traveltime"],
         studio_id: studio.id
       )
+    end
+    
+    def set_time(studio)
+      studio.open =  params[:studio][:"open(4i)"]   + ":" + params[:studio][:"open(5i)"]
+      studio.close =  params[:studio][:"close(4i)"] + ":" + params[:studio][:"close(5i)"]
     end
 end
