@@ -4,7 +4,7 @@ class StudiosController < ApplicationController
   # get /studios
   def index
     @q = Studio.search(search_params)
-    @q_studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :access).paginate(page: params[:page], per_page: 9)
+    @q_studios = @q.result.includes(:hash_tags, :hash_tag_relationships, :reviews, :access, :weekday_fee).paginate(page: params[:page], per_page: 9)
   end
 
   # post /studios
@@ -14,7 +14,6 @@ class StudiosController < ApplicationController
     @studio.created_user_id = @current_user.id
     geocode(@studio)
     save_photo(@studio) if @studio.image.blank?
-    set_time(@studio)
     #debugger
     if @studio.save
       create_access(@studio)
@@ -53,7 +52,6 @@ class StudiosController < ApplicationController
     @studio.assign_attributes(studio_params)
     geocode(@studio)
     save_photo(@studio)
-    set_time(@studio)
       if @studio.access.nil?
         create_access(@studio)
       else
@@ -90,7 +88,7 @@ class StudiosController < ApplicationController
                                      :url,
                                      :latitude,
                                      :longitude,
-                                     :remarks,
+                                     :opening_hours,
                                      :weekday_fee_id,
                                      :holiday_fee_id,
                                      {:hash_tag_ids => []}
@@ -147,10 +145,5 @@ class StudiosController < ApplicationController
         traveltime: access_response[0]["traveltime"],
         studio_id: studio.id
       )
-    end
-    
-    def set_time(studio)
-      studio.open =  params[:studio][:"open(4i)"]   + ":" + params[:studio][:"open(5i)"]
-      studio.close =  params[:studio][:"close(4i)"] + ":" + params[:studio][:"close(5i)"]
     end
 end

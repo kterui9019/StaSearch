@@ -1,28 +1,33 @@
 <%= render "error_messages" %>
 <%= form_for(@studio) do |f| %>
   <div class="form-group">
-    <%= f.label :住所 %>
-    <%= f.text_field :address, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label :電話番号 %>
-    <%= f.text_field :telno, class: "form-control" %>
+    <%= f.text_field :telno, class: "form-control", placeholder: "例) 000-0000-0000" %>
   </div>
   <div class="form-group">
-    <%= f.label :スタジオの画像 %></br>
+    <%= f.label "URL" %>
+    <%= f.text_field :url, class: "form-control", placeholder: "例) https://sta-search.herokuapp.com/" %>
+  </div>
+  <div class="form-group">
+    <%= f.label "営業時間" %>
+    <%= f.text_field :opening_hours, class: "form-control", placeholder: "例)　[平日]24時間営業 [休日]9:00~22:00" %>
+  </div>
+  <div class="form-group">
+    <%= f.label "平日料金/1h" %></br>
+    <%= f.select :weekday_fee_id, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "休日料金/1h" %></br>
+    <%= f.select :holiday_fee_id, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label "スタジオの画像 (未選択の場合はGoogle Placesから自動取得します。)" %></br>
     <%= f.file_field :image %>
   </div>
   <div class="form-group">
-    <%= f.label :URL %>
-    <%= f.text_field :url, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label :ハッシュタグ %></br>
-    <div class="form-check form-check-inline">
-      <%= collection_check_boxes(:studio, :hash_tag_ids, HashTag.all, :id, :tag) do |b| %>
-        <%= b.label { b.check_box + b.text } %>
-      <% end %>
-    </div>
+      <%= f.collection_check_boxes :hash_tags, HashTag.all, :id, :tag %>
   </div>
   <div class="text-center">
     <%= f.submit "送信", class: "btn btn-primary" %>

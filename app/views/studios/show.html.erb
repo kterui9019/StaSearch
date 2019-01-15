@@ -45,6 +45,12 @@
             <tr align="left">
               <td><i class="fas fa-globe-europe"></i></td><td><%= @studio.url %></td>
             </tr>
+            <tr align="left">
+              <td><i class="far fa-clock"></i></td><td><%= @studio.opening_hours %></td>
+            </tr>
+            <tr align="left">
+              <td><i class="fas fa-yen-sign"></i></td><td>平日:<%= @studio.weekday_fee&.fee %> | 休日:<%= @studio.holiday_fee&.fee %></td>
+            </tr>
           </table>
         </div>
       </div>
