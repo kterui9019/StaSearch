@@ -1,5 +1,9 @@
 <% content_for(:html_title) { 'ユーザー情報編集' } %>
-<div class="container user-edit-container">
+<div class="container user-container">
   <h2>ユーザー情報変更</h2>
-  <%= render "form" %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2 col-sm-12" >
+    <%= render "form" %>
+    </div>  
+  </div>
 </div>

@@ -1,7 +1,9 @@
 <% content_for(:html_title) { 'スタジオ登録' } %>
-<div class="container new_studio_container">
-  <h1>新規スタジオ登録</h1>
+<div class="container studio-container">
+  <h2>新規スタジオ登録</h2>
   <%= render "error_messages" %>
+  <div class="row">
+    <div class="col-md-8 offset-md-2 col-sm-12" >
   <%= form_for(@studio) do |f| %>
     <div class="form-group">
       <%= f.label :スタジオ名 %>
@@ -29,6 +31,10 @@
         <%= f.collection_check_boxes :hash_tags, HashTag.all, :id, :tag %>
       </div>
     </div>
-    <%= f.submit "送信", class: "btn btn-primary" %>
+    <div class="text-center">
+      <%= f.submit "送信", class: "btn btn-primary" %>
+    </div>
   <% end %>
+  </div>
+  </div>
 </div>
