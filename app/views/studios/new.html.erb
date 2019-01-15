@@ -18,8 +18,33 @@
       <%= f.text_field :telno, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label :URL %>
+      <%= f.label "URL" %>
       <%= f.text_field :url, class: "form-control" %>
+    </div>
+    <%= f.label :営業時間 %>
+    <div class="row time-select-group">
+      <div class="col-xs-2 time">
+        <%= f.time_select :open, {minute_step: 10, default: {hour: '00', minute: '00'}}, class: 'form-control' %>
+      </div>
+      <p>～</p>
+      <div class="col-xs-2">
+        <%= f.time_select :close,{minute_step: 10, default: {hour: '00', minute: '00'}}, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label "備考" %>
+      <%= f.text_field :remarks, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label "平日料金/1h" %></br>
+      <%#= f.range_field :fee, id:"range", class: "custom-range", min:"0", max:"20000", step:"500" %>
+      <%= f.select :weekday_fee_id, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "休日料金/1h" %></br>
+      <%#= f.range_field :fee, id:"range", class: "custom-range", min:"0", max:"20000", step:"500" %>
+      <%= f.select :holiday_fee_id, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
     </div>
     <div class="form-group">
       <%= f.label :スタジオの画像 %></br>
@@ -38,3 +63,12 @@
   </div>
   </div>
 </div>
+
+<script>
+  var obj = document.getElementById("range");
+  function showValue() {
+    document.getElementById("value").textContent = option.value;
+    
+  }
+  obj.addEventListener("change", showValue, false);
+</script>

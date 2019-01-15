@@ -12,7 +12,10 @@ class Studio < ApplicationRecord
   has_many :reviews, through: :review_relationships, dependent: :destroy
   #アクセス
   has_one :access, dependent: :destroy
-
+  #料金
+  belongs_to :weekday_fee, class_name: "Fee", optional: true
+  belongs_to :holiday_fee, class_name: "Fee", optional: true
+  
   #カラムの名前をmount_uploaderに指定
   #THUMBNAIL_SIZE = [300, 250]
   mount_uploader :image, ImageUploader
