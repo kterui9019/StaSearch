@@ -47,15 +47,16 @@ class StudiosController < ApplicationController
   # patch /studios/:id
   def update
     @studio = Studio.find(params[:id])
-    if  @studio.update_attributes(studio_params)
-      geocode(@studio)
-      save_photo(@studio)
+    @studio.assign_attributes(studio_params)
+    geocode(@studio)
+    save_photo(@studio)
       if @studio.access.nil?
         create_access(@studio)
       else
         update_access(@studio)
       end
-      flash[:success] = "スタジオの編集に成功しました！"
+    if @studio.save
+      flash[:success] = "スタジオの編集に成功しました。"
       redirect_to studio_path(@studio)
     else
       flash.now[:danger] = "スタジオの編集に失敗しました。"
