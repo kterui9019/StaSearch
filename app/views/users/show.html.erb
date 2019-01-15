@@ -18,7 +18,9 @@
               <div class="card-body px-2 py-3">
                 <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
                 <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
-                <small class="small-block"><i class="fas fa-subway"></i> </td><td><%= studio.access&.name %></small>
+                <small class="small-block"><i class="fas fa-subway"></i><%= studio.access&.name %></small>
+                <small class="small-block"><i class="far fa-clock"></i><%= studio.opening_hours %></small>
+                <small class="small-block"><i class="fas fa-yen-sign"></i><%= studio.weekday_fee&.fee %></small>
                 <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
                 <div class="score-review"><%= rating(studio.reviews) %></div>
                 <p class="count-review"><i class="fa fa-comments"></i> <%= studio.reviews.count %></p>
