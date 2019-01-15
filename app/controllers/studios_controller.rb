@@ -49,7 +49,7 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     if  @studio.update_attributes(studio_params)
       geocode(@studio)
-      save_photo(@studio) if @studio.image.blank?
+      save_photo(@studio)
       if @studio.access.nil?
         create_access(@studio)
       else
