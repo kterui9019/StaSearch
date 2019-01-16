@@ -1,16 +1,17 @@
-require "date"
-=begin
-tags =['#料金が安い', '#設備がキレイ', '#機材レンタル有り','#待合室が広い','#wi-fi有', '#24時間営業', '#リハーサル', '#レコーディング']
-
-tags.each do |tag|
-  HashTag.create!(tag: tag)
-end
-
-User.create!(
+if Rails.env.production?
+    # 本番用設定を書く
+else
+  # 開発・テスト用設定を書く
+  tags =['#料金が安い', '#設備がキレイ', '#機材レンタル有り','#待合室が広い','#wi-fi有', '#24時間営業', '#リハーサル', '#レコーディング']
+  tags.each do |tag|
+    HashTag.create!(tag: tag)
+  end
+  User.create!(
               name:"foobar",
               email:"foobar@gmail.com",
               password:"foobar")
-=end
+end
+
 locations = ["35.670812,139.754182",
             "35.668796,139.786583",
             "35.66849,139.746192",
