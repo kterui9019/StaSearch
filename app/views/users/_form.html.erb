@@ -1,23 +1,23 @@
 <%= render "error_messages" %>
 <%= form_for(@user) do |f| %>
   <div class="form-group">
-    <%= f.label :ユーザー名 %>
+    <%= f.label "ユーザー名(必須項目)" %>
     <%= f.text_field :name, class: "form-control" %>
   </div>  
   <div class="form-group">
-    <%= f.label :メールアドレス %>
+    <%= f.label "メールアドレス(必須項目)" %>
     <%= f.email_field :email, class: "form-control" %>
   </div>  
   <div class="form-group">
-    <%= f.label :パスワード %>
+    <%= f.label "パスワード(必須項目)" %>
     <%= f.password_field :password, class: "form-control" %>
   </div> 
   <div class="form-group">
-    <%= f.label :パスワード確認 %>
+    <%= f.label "パスワード(確認)" %>
     <%= f.password_field :password_confirmation, class: "form-control" %>
   </div> 
   <div class="form-group">
-    <%= f.label :アイコン画像 %></br>
+    <%= f.label "アイコン画像(任意項目)" %></br>
     <%= f.file_field :image %>
   </div>
   <div class="text-center">
