@@ -1,20 +1,3 @@
-fees = ["0~999円",
-        "1000~1999円",
-        "2000~2999円",
-        "3000~3999円",
-        "4000~4999円",
-        "5000~5999円",
-        "6000~6999円",
-        "7000~7999円",
-        "8000~8999円",
-        "9000~9999円"
-        ]
-
-fees.each do |fee|
-  Fee.create!(fee: fee)
-end
-
-=begin
 if Rails.env.production?
     # 本番用設定を書く
 else
@@ -27,6 +10,22 @@ else
               name:"foobar",
               email:"foobar@gmail.com",
               password:"foobar")
+              
+  fees = ["0~999円",
+        "1000~1999円",
+        "2000~2999円",
+        "3000~3999円",
+        "4000~4999円",
+        "5000~5999円",
+        "6000~6999円",
+        "7000~7999円",
+        "8000~8999円",
+        "9000~9999円"
+        ]
+
+  fees.each do |fee|
+    Fee.create!(fee: fee)
+  end
 end
 
 locations = ["35.670812,139.754182",
@@ -197,4 +196,3 @@ locations.each do |location|
     end
   end
 end
-=end
