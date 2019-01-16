@@ -1,12 +1,36 @@
 class ImageUploader < CarrierWave::Uploader::Base
-  include Cloudinary::CarrierWave
+  if Rails.env.production?
+    # 本番用設定を書く
+    include Cloudinary::CarrierWave
+  else
+    # 開発・テスト用設定を書く
+    include CarrierWave::RMagick
+    
+    def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
+  end
 
   def default_url
     "default-#{model.class.to_s.underscore}-icon.jpeg"
   end
 
-   # リサイズしたり画像形式を変更するのに必要
-  include CarrierWave::RMagick
+  #画像の上限を480x480にする
+  process :resize_to_limit => [480, 480]
+  
+  #保存形式をJPGにする
+  process :convert => 'jpg'
+  
+  #jpg,jpeg,gif,pngしか受け付けない
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
+ 
+  #拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
+  def filename
+    super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
+  end
+
 
 =begin
   version :thumb, if: :has_thumbnail? do
@@ -23,11 +47,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 =end
  
- # 画像の上限を480x480にする
-  process :resize_to_limit => [480, 480]
  
-  # 保存形式をJPGにする
-  process :convert => 'jpg'
+  
 
 =begin 
   # サムネイルを生成する設定
@@ -48,15 +69,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 =end
 
-  # jpg,jpeg,gif,pngしか受け付けない
-  def extension_white_list
-    %w(jpg jpeg gif png)
-  end
- 
- # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
-  def filename
-    super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
-  end
+  
  
  #ファイル名を日付にするとタイミングのせいでサムネイル名がずれる
  #ファイル名はランダムで一意になる
@@ -64,9 +77,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #  "#{secure_token}.#{file.extension}" if original_filename.present?
   #end
 
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  
 
  
   protected
