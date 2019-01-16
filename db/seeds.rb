@@ -1,5 +1,5 @@
 require "date"
-
+=begin
 tags =['#料金が安い', '#設備がキレイ', '#機材レンタル有り','#待合室が広い','#wi-fi有', '#24時間営業', '#リハーサル', '#レコーディング']
 
 tags.each do |tag|
@@ -10,7 +10,7 @@ User.create!(
               name:"foobar",
               email:"foobar@gmail.com",
               password:"foobar")
-
+=end
 locations = ["35.670812,139.754182",
             "35.668796,139.786583",
             "35.66849,139.746192",
@@ -96,7 +96,7 @@ locations.each do |location|
     )
     
     #すでにあるplace_idの場合はスキップ
-    next if !studio.valid?
+    next if studio.invalid?
     
     #写真がある場合
     if result.has_key?("photos")
