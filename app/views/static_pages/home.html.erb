@@ -5,14 +5,15 @@
       <p>スタサーチはエリアや特徴からスタジオを探すことができます。</p>
       <%= search_form_for(@q, html: { class: '' }, url:studios_path) do |f| %>
         <div class="form-row">
-          <div class="col-sm-6 offset-sm-3 input-group">
-            <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"新宿　サンプルスタジオ" %>
+          <div class="col-sm-8 offset-sm-2 input-group">
+            <%= f.search_field :access_line_cont, class:"form-control", placeholder:"山手線" %>
+            <%= f.search_field :access_name_cont, class:"form-control", placeholder:"新宿駅" %>
+            <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"サンプルスタジオ" %>
             <span class="input-group-btn">
           		<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-tags"></i></button>
           	</span>
           	<%= f.submit "検索", class:"btn btn-primary" %>
           </div>
-          
         </div>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">

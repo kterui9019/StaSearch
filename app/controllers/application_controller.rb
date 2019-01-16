@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
       end
     end
     @q = Studio.ransack(params[:q])
-    @q_studios = @q.result(distinct: true).includes(:hash_tags, :hash_tag_relationships, :reviews, :access).paginate(page: params[:page], per_page: 9)
+    @q_studios = @q.result(distinct: true)
+    #.includes(:hash_tags, :hash_tag_relationships, :reviews, :access).paginate(page: params[:page], per_page: 9)
     
   end
   

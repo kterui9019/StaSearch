@@ -1,6 +1,6 @@
 require "date"
 
-tags =['#料金が安い', '#設備がキレイ', '#機材レンタル有り','#待合室が広い','#wi-fi有', '#24時間営業']
+tags =['#料金が安い', '#設備がキレイ', '#機材レンタル有り','#待合室が広い','#wi-fi有', '#24時間営業', '#リハーサル', '#レコーディング']
 
 tags.each do |tag|
   HashTag.create!(tag: tag)
@@ -94,6 +94,10 @@ locations.each do |location|
                   place_id: result["place_id"],
                   created_user_id: 1
     )
+    
+    #すでにあるplace_idの場合はスキップ
+    next if !studio.valid?
+    
     #写真がある場合
     if result.has_key?("photos")
       photo_reference = result['photos'][0]['photo_reference'] 
@@ -116,14 +120,12 @@ locations.each do |location|
       studio_id: studio.id
       )
     access.save
-    
   end
 
   #レスポンスにnext_page_tokenがある場合（21件以上ある場合）
   if response.has_key?("next_page_token") == true
     token = response["next_page_token"]
     2.times do
-      #time.sleep(2)
       uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=音楽スタジオ&location=#{location}&radius=10000&language=ja&pagetoken=#{token}&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
       res = HTTP.get(uri).to_s
       response = JSON.parse(res)
@@ -143,6 +145,9 @@ locations.each do |location|
                       place_id: result["place_id"],
                       created_user_id: 1
         )
+        
+        #すでにあるplace_idの場合はスキップ
+        next if !studio.valid?
         
         #写真がある場合
         if result.has_key?("photos")
