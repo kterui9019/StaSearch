@@ -59,9 +59,13 @@
             <div class="modal-body">
               <%= search_form_for(@q, html: { class: '.d-none' }, url:studios_path) do |f| %>
                 <div class="form-row">
-                  <div class="col-sm-12 offset-sm-0 input-group">
+                  <div class="col-md-2 px-0 my-2 col-sm-12">
                     <%= f.search_field :access_line_cont, class:"form-control", placeholder:"山手線" %>
+                  </div>
+                  <div class="col-md-2 px-0 my-2 col-sm-12">
                     <%= f.search_field :access_name_cont, class:"form-control", placeholder:"新宿駅" %>
+                  </div>
+                  <div class="col-md-8 px-0 my-2 col-sm-12 input-group">
                     <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"サンプルスタジオ" %>
                     <span class="input-group-btn">
                   		<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal"><i class="fas fa-tags"></i></button>
