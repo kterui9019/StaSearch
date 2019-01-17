@@ -1,13 +1,13 @@
 <% content_for(:html_title) { @studio.name } %>
 <div class="container show-studio-container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-xl-8 col-12">
       <div class="card">
         <div class="card-header text-left">
           <h2 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" if logged_in? %></h2>
           <div class="rating"><div id="star-head" data-score="<%= rating(@reviews) %>"></div> <p class="rate-score"><%= rating(@reviews) %></p></div>
         </div>
-        <%= image_tag @studio.image.url, class:"card-img", size:"400x400" %>
+        <%= image_tag @studio.image.url, class:"card-img", size:"400x550" %>
         <div class="card-body">
           <p><i class="fas fa-tags"></i> <%= render "hash_tag" %></p>
           
@@ -16,42 +16,68 @@
       </div><!-- card -->
     </div><!-- col -->
     
-    <div class="col-md-4">
+    <div class="col-xl-4 col-12">
       <div class="card">
         <div class="card-header">
           <h5>店舗情報</h5>
         </div>
         <div class="card-body">
-          <table>
-            <!--
-            <tr align="left">
-              <td><i class="fas fa-home"></i> 店舗名</td><td><#%= @studio.name %></td>
-            </tr>
-            -->
-            <tr align="left">
-              <td><i class="fas fa-map-marker-alt"></i></td><td><%= @studio.address %></td>
-            </tr>
-            <!--
-            <tr align="left">
-              <td><i class="fas fa-location-arrow"></i> </td><td><%#= @studio.area.name %></td>
-            </tr>
-            -->
-            <tr align="left">
-              <td><i class="fas fa-subway"></i></td><td><%= @studio.access&.name %></td>
-            </tr>
-            <tr align="left">
-              <td><i class="fas fa-phone"></i></td><td><%= @studio.telno %></td>
-            </tr>
-            <tr align="left">
-              <td><i class="fas fa-globe-europe"></i></td><td><%= @studio.url %></td>
-            </tr>
-            <tr align="left">
-              <td><i class="far fa-clock"></i></td><td><%= @studio.opening_hours %></td>
-            </tr>
-            <tr align="left">
-              <td><i class="fas fa-yen-sign"></i></td><td>平日:<%= @studio.weekday_fee&.fee %> | 休日:<%= @studio.holiday_fee&.fee %></td>
-            </tr>
-          </table>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="fas fa-map-marker-alt fa-fw"></i> 住所
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.address %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="fas fa-subway fa-fw"></i> 最寄駅
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.access&.name %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="fas fa-phone fa-fw"></i> 電話番号
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.telno %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="fas fa-globe-europe fa-fw"></i> URL
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= link_to @studio.url %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="far fa-clock fa-fw"></i> 営業時間
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.opening_hours %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <i class="fas fa-yen-sign fa-fw"></i> 平日料金
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.weekday_fee&.fee %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-5 text-left pl-2">
+              <span class="holiday"></span> 休日料金
+            </div>
+            <div class="col-sm-8 col-7 text-left px-0">
+              <%= @studio.holiday_fee&.fee %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="card">
