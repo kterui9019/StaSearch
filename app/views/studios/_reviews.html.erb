@@ -1,7 +1,7 @@
 <% @reviews.each do |review| %>
 <div class="review row text-left">
   <div class="icon col-sm-2 offset-sm-1 col-4"><%= image_tag review.user.image.url, class:"review-icon", size:"50x50" %></div>
-  <div class="balloon col-8">
+  <div class="balloon col-8 text-left">
     <div class="review_title"><%= review.title %></div>
     <div class="star-review" data-score="<%= review.rate %>"></div>
     <div class="review_content"><%= simple_format(review.review) %></div>

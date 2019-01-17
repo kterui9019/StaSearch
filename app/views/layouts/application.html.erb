@@ -69,14 +69,18 @@
                   	<%= f.submit "検索", class:"btn btn-primary" %>
                   </div>
                 </div>
-                <a href="#" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal">詳細条件の表示</a>
+                <a href="#" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal">▼ 詳細条件の表示</a>
                 <div class="collapse" id="collapseModal">
-                  <div class="form">
-                    <div class="form-gorup">
+                  <div class="form-row">
+                    <div class="form-gorup col-6">
                       <%= f.label "平日価格帯" %>
-                      <%= f.search_field :access_name_or_access_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
+                      <%= f.select :weekday_fee_id_eq, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
                     </div>
-                    <div class="form-check">
+                    <div class="form-gorup col-6">
+                      <%= f.label "休日価格帯" %>
+                      <%= f.select :holiday_fee_id_eq, options_from_collection_for_select(Fee.all, :id, :fee), {include_blank:true}, {class: "form-control"} %>
+                    </div>
+                    <div class="form-check col-12">
                       <%= f.label "特徴" %></br>
                     　<%= f.collection_check_boxes :hash_tags_id_in, @q_hash_tags, :id, :tag %>
                     </div>
