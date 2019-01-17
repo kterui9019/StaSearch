@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   
   def set_search_query
     @q_hash_tags = HashTag.all
+    @q_fees = Fee.all
     words = params[:q].delete(:name_or_address_cont) if params[:q].present?
     if words.present?
       params[:q][:groupings] = []
