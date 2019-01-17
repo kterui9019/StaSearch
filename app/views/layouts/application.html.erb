@@ -63,12 +63,14 @@
                     <%= f.search_field :access_name_or_access_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
                     <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"スタジオ名" %>
                     <span class="input-group-btn">
-                  		<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal"><i class="fas fa-tags"></i></button>
+                  		<!--<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal"><i class="fas fa-tags"></i></button>
+                  		
                   	</span>
-                  	</span>
+                  	-->
                   	<%= f.submit "検索", class:"btn btn-primary" %>
                   </div>
                 </div>
+                <a data-toggle="collapse" data-target="#collapseModal" aria-expanded="false" aria-controls="collapseModal">詳細検索</a>
                 <div class="collapse" id="collapseModal">
                   <div class="card card-body">
                     <div class="text-center form-check">
