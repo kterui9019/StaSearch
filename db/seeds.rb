@@ -1,3 +1,5 @@
+Access.all.destroy_all
+
 studios = Studio.all
 
 studios.each do |studio|
