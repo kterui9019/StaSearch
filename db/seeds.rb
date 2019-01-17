@@ -20,8 +20,7 @@ else
         "6000~6999円",
         "7000~7999円",
         "8000~8999円",
-        "9000~9999円"
-        ]
+        "9000~9999円"]
 
   fees.each do |fee|
     Fee.create!(fee: fee)
@@ -84,8 +83,7 @@ locations = ["35.670812,139.754182",
             "34.326527,139.213502",
             "34.064749,139.496507",
             "33.093013,139.84051",
-            "24.779258,141.319783"
-            ]
+            "24.779258,141.319783"]
 
 locations.each do |location|
   #uri = URI.parse URI.encode "https://maps.googleapis.com/maps/api/place/textsearch/json?query=音楽スタジオ+新宿駅&language=ja&key=#{ENV['GOOGLEMAPS_IP_KEY']}"
