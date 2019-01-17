@@ -52,11 +52,11 @@ class StudiosController < ApplicationController
     @studio.assign_attributes(studio_params)
     geocode(@studio)
     save_photo(@studio)
-      if @studio.access.nil?
-        create_access(@studio)
-      else
-        update_access(@studio)
-      end
+    #住所再登録の場合はアクセス情報の再登録
+    if @studio.address_changed?
+      @studio.accesses.destroy_all
+      create_access(@studio)
+    end
     if @studio.save
       flash[:success] = "スタジオの編集に成功しました。"
       redirect_to studio_path(@studio)
@@ -121,29 +121,14 @@ class StudiosController < ApplicationController
       y = studio.latitude.to_f
       access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
       access_res = HTTP.get(access_uri).to_s
-      access_response = JSON.parse(access_res)
-      access = Access.new(
-        name: access_response[0]["name"],
-        line: access_response[0]["line"],
-        distanceKm: access_response[0]["distanceKm"],
-        traveltime: access_response[0]["traveltime"],
-        studio_id: studio.id
-        )
-      access&.save
+      access_responses = JSON.parse(access_res)
+      access_responses.each do |access_response|
+        Access.create(name: access_response["name"],
+                            line: access_response["line"],
+                            distanceKm: access_response["distanceKm"],
+                            traveltime: access_response["traveltime"],
+                            studio_id: studio.id)
+      end
     end
     
-    def update_access(studio)
-      x = studio.longitude.to_f
-      y = studio.latitude.to_f
-      access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
-      access_res = HTTP.get(access_uri).to_s
-      access_response = JSON.parse(access_res)
-      studio.access&.update_attributes(
-        name: access_response[0]["name"],
-        line: access_response[0]["line"],
-        distanceKm: access_response[0]["distanceKm"],
-        traveltime: access_response[0]["traveltime"],
-        studio_id: studio.id
-      )
-    end
 end
