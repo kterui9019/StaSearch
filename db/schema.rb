@@ -10,14 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_140227) do
+ActiveRecord::Schema.define(version: 2019_01_17_070733) do
 
   create_table "accesses", force: :cascade do |t|
     t.string "name"
     t.string "line"
     t.string "distanceKm"
     t.string "traveltime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "studio_id"
+  end
+
+  create_table "accesses_relationships", force: :cascade do |t|
+    t.integer "studio_id"
+    t.integer "access_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

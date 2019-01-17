@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @studios = @user.favorite_studios.includes(:hash_tags, :hash_tag_relationships, :reviews, :access, :weekday_fee).paginate(page: params[:page], per_page: 6)
+    @studios = @user.favorite_studios.includes(:hash_tags, :hash_tag_relationships, :reviews, :accesses, :weekday_fee).paginate(page: params[:page], per_page: 6)
   end
   
   def edit

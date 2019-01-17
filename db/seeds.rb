@@ -1,3 +1,21 @@
+studios = Studio.all
+
+studios.each do |studio|
+  x = studio.longitude.to_f
+  y = studio.latitude.to_f
+  access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
+  access_res = HTTP.get(access_uri).to_s
+  access_responses = JSON.parse(access_res)
+  access_responses.each do |access_response|
+    Access.create(name: access_response["name"],
+                        line: access_response["line"],
+                        distanceKm: access_response["distanceKm"],
+                        traveltime: access_response["traveltime"],
+                        studio_id: studio.id)
+  end
+end
+
+=begin
 if Rails.env.production?
     # 本番用設定を書く
 else
@@ -126,15 +144,16 @@ locations.each do |location|
     y = studio.latitude.to_f
     access_uri = URI.parse URI.encode "http://map.simpleapi.net/stationapi?x=#{x}&y=#{y}&output=json"
     access_res = HTTP.get(access_uri).to_s
-    access_response = JSON.parse(access_res)
-    access = Access.new(
-      name: access_response[0]["name"],
-      line: access_response[0]["line"],
-      distanceKm: access_response[0]["distanceKm"],
-      traveltime: access_response[0]["traveltime"],
-      studio_id: studio.id
-      )
-    access.save
+    access_responses = JSON.parse(access_res)
+    
+    access_responses.each do |access_response|
+      access = Access.new(name: access_response["name"],
+                          line: access_response["line"],
+                          distanceKm: access_response["distanceKm"],
+                          traveltime: access_response["traveltime"],
+                          studio_id: studio.id)
+      access.save
+    end
   end
 
   #レスポンスにnext_page_tokenがある場合（21件以上ある場合）
@@ -194,3 +213,4 @@ locations.each do |location|
     end
   end
 end
+=end

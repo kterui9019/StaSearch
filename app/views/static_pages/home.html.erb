@@ -6,7 +6,7 @@
       <%= search_form_for(@q, html: { class: '' }, url:studios_path) do |f| %>
         <div class="form-row">
           <div class="col-sm-8 offset-sm-2 input-group">
-            <%= f.search_field :access_name_or_access_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
+            <%= f.search_field :accesses_name_or_accesses_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
             <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"スタジオ名" %>
             <span class="input-group-btn">
           		<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-tags"></i></button>
@@ -72,7 +72,7 @@
         <div class="card-body px-2 py-3">
           <h5 class="card-title"><%= link_to studio.name, studio_path(studio) %></h5>
           <small class="small-block"><i class="fas fa-map-marker-alt"></i> <cite title="<%= studio.address %>"><%= studio.address %> </small>
-          <small class="small-block"><i class="fas fa-subway"></i><%= studio.access&.name %></small>
+          <small class="small-block"><i class="fas fa-subway"></i><%= access_info(studio.accesses) %></small>
           <small class="small-block"><i class="far fa-clock"></i><%= studio.opening_hours %></small>
           <small class="small-block"><i class="fas fa-yen-sign"></i><%= studio.weekday_fee&.fee %></small>
           <div class="star-review" data-score="<%= rating(studio.reviews) %>"></div>
