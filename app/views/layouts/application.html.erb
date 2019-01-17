@@ -60,7 +60,7 @@
               <%= search_form_for(@q, html: { class: '.d-none' }, url:studios_path) do |f| %>
                 <div class="form-row">
                   <div class="col-lg-4 col-4 px-0 ">
-                    <%= f.search_field :access_name_or_access_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
+                    <%= f.search_field :accesses_name_or_accesses_line_cont, class:"form-control", placeholder:"路線名・駅名" %>
                   </div>
                   <div class="col-lg-6 col-6 px-0 ">
                     <%= f.search_field :name_or_address_cont, class:"form-control", placeholder:"スタジオ名" %>

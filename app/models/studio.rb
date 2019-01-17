@@ -11,7 +11,7 @@ class Studio < ApplicationRecord
   has_many :review_relationships, dependent: :destroy
   has_many :reviews, through: :review_relationships, dependent: :destroy
   #アクセス
-  has_one :access, dependent: :destroy
+  has_many :accesses, dependent: :destroy
   #料金
   belongs_to :weekday_fee, class_name: "Fee", optional: true
   belongs_to :holiday_fee, class_name: "Fee", optional: true

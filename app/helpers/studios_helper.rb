@@ -25,4 +25,12 @@ module StudiosHelper
     words.each { |word| ary.push word[:name_or_address_cont] }
     ary.join(" ")
   end
+  
+  def line_info(access)
+    if access&.line.include?("ほか")
+      return access&.line.slice(0..-3)
+    else
+      return access&.line
+    end
+  end
 end

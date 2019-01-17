@@ -4,7 +4,7 @@ class StudiosController < ApplicationController
   # get /studios
   def index
     @q = Studio.search(search_params)
-    @q_studios = @q.result(distinct: true).includes(:hash_tags, :hash_tag_relationships, :reviews, :access, :weekday_fee).paginate(page: params[:page], per_page: 9)
+    @q_studios = @q.result(distinct: true).includes(:hash_tags, :hash_tag_relationships, :reviews, :accesses, :weekday_fee).paginate(page: params[:page], per_page: 9)
   end
 
   # post /studios
