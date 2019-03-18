@@ -29,6 +29,7 @@ gem 'dotenv-rails'
 gem 'ransack'
 gem 'rails-i18n'
 gem 'google-analytics-rails'
+gem 'meta-tags'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

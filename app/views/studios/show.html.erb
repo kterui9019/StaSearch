@@ -1,6 +1,9 @@
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2"></script>
 
+<% set_meta_tags description: "#{@studio.accesses}の音楽スタジオ #{@studio.name}の詳細情報ページ" %>
+<% set_meta_tags og: {title: "#{@studio.name} | スタサーチ", image: "#{@studio.image_url}"} %>
+
 <% content_for(:html_title) { @studio.name } %>
 <div class="container show-studio-container">
   <div class="row">
