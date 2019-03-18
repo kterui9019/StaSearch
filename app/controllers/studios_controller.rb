@@ -58,6 +58,7 @@ class StudiosController < ApplicationController
       create_access(@studio)
     end
     if @studio.save
+      @studio.regist_hash_tag(params[:studio][:hash_tags])
       flash[:success] = "スタジオの編集に成功しました。"
       redirect_to studio_path(@studio)
     else
@@ -90,8 +91,8 @@ class StudiosController < ApplicationController
                                      :longitude,
                                      :opening_hours,
                                      :weekday_fee_id,
-                                     :holiday_fee_id,
-                                     {:hash_tag_ids => []}
+                                     :holiday_fee_id
+                                     #{:hash_tag_ids => []}
                                      )
     end
     
