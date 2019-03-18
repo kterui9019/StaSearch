@@ -270,6 +270,15 @@ body{
       .holiday{
         margin-left:24px;
       }
+      .share_btn_container{
+        .share_btn{
+          display: inline-block;
+        }
+        .fb_iframe_widget > span {
+          vertical-align: baseline !important;
+        }
+
+      }
       .review{
         padding: 30px;
         .balloon{
