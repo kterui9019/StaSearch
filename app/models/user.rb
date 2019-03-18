@@ -8,7 +8,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true
+  validates :password, presence: true, length: { minimum: 6 }
   #カラムの名前をmount_uploaderに指定
   #THUMBNAIL_SIZE = [100, 100]
   mount_uploader :image, ImageUploader
