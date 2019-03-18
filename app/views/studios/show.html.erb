@@ -7,7 +7,9 @@
           <h2 class="show-studio-header"><%= @studio.name %> <%= render "favorite_form" if logged_in? %></h2>
           <div class="rating"><div id="star-head" data-score="<%= rating(@reviews) %>"></div> <p class="rate-score"><%= rating(@reviews) %></p></div>
         </div>
-        <%= image_tag @studio.image.url, class:"card-img", size:"400x550" %>
+        <div>
+          <%= image_tag @studio.image.url, class:"card-img img-responsive" %>
+        </div>
         <div class="card-body">
           <p><i class="fas fa-tags"></i> <%= render "hash_tag" %></p>
           
