@@ -1,3 +1,6 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.2"></script>
+
 <% content_for(:html_title) { @studio.name } %>
 <div class="container show-studio-container">
   <div class="row">
@@ -14,6 +17,18 @@
           <p><i class="fas fa-tags"></i> <%= render "hash_tag" %></p>
           
           <p class="card-text updated_at"><%= link_to "編集", edit_studio_path %> | 最終更新日：<%= @studio.updated_at %></p>
+          
+          <div class="share_btn_container">
+            <div class="twitter share_btn">
+            　<a href="//twitter.com/share" class="twitter-share-button" data-text="<%= @studio.name %> <%= @studio_url %> #スタサーチ" data-lang="ja"></a>
+            </div>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            
+            <div class="fb-share-button share_btn pb-10" data-href="<%= @studio_url %>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
+  
+            <div class="line-it-button share_btn" data-lang="ja" data-type="share-a" data-url="<%= @studio.url %>" style="display: none;"></div>
+            <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+          </div>
         </div>
       </div><!-- card -->
     </div><!-- col -->
@@ -118,6 +133,8 @@
     <%= link_to "削除する", studio_path(@studio), method: :delete if current_user.id == @studio.created_user.id %>
   <% end %>
 </div>
+
+
 
 
 <script type="text/javascript">
