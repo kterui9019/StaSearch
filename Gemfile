@@ -57,6 +57,8 @@ group :development, :test do
   gem 'bullet'
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem "factory_bot_rails", "~> 4.0"
+
 end
 
 group :development do
