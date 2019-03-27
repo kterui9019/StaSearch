@@ -113,6 +113,9 @@
         <p class="access">
           <%= @studio.accesses&.first.traveltime %>
         </p>
+        <p class="access">
+          <%= link_to "GoogleMapで開く", "https://www.google.com/maps/search/?api=1&query=#{@studio.latitude},#{@studio.longitude}&query_place_id=#{@studio.place_id}" , target: "_blank" %>
+        </p>
       </div>
     </div>
   </div><!-- row -->
