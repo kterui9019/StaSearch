@@ -1,4 +1,7 @@
 # README
+スタサーチはバンドスタジオを検索できるWebアプリケーションです。
+https://sta-search.herokuapp.com/
+
 
 ## Setup
 ```
